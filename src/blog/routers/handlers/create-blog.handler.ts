@@ -1,10 +1,14 @@
-import { Request, Response } from 'express';
+import {Request, Response} from 'express';
 import {blogRepository} from "../../repositories/blog.repository";
 import {HttpStatus} from "../../../core/types/http-statuses";
 import {db} from "../../../db/in-memory.db";
 import {Blog} from "../../types/blog";
+import {BlogInputDto} from "../../dto/blog.input-dto";
 
-export function createBlogHandler(req: Request, res: Response) {
+export function createBlogHandler(
+    req: Request<{}, {}, BlogInputDto>,
+    res: Response
+) {
     const newBlog: Blog = {
         id: db.blogs.length ? db.blogs[db.blogs.length - 1].id + 1 : '1',
         name: req.body.name,

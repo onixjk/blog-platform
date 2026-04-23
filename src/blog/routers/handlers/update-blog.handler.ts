@@ -1,10 +1,14 @@
-import { Request, Response } from 'express';
+import {Request, Response} from 'express';
 import {blogRepository} from "../../repositories/blog.repository";
 import {HttpStatus} from "../../../core/types/http-statuses";
 import {createErrorsMessages} from "../../../core/utils/error.utils";
+import {BlogInputDto} from "../../dto/blog.input-dto";
 
-export function updateBlogHandler(req: Request, res: Response) {
-    const id = req.params.id.toString();
+export function updateBlogHandler(
+    req: Request<{ id: string }, {}, BlogInputDto>,
+    res: Response
+) {
+    const id = req.params.id;
     const blog = blogRepository.findById(id);
 
     if (!blog) {
