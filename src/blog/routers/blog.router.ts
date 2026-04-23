@@ -4,16 +4,19 @@ import {getBlogListHandler} from "./handlers/get-blog-list.handler";
 import {createBlogHandler} from "./handlers/create-blog.handler";
 import {updateBlogHandler} from "./handlers/update-blog.handler";
 import {deleteBlogHandler} from "./handlers/delete-blog.handler";
+import {idValidation} from "../../core/middlewares/validation/params-id.validation-middleware";
+import {inputValidationResultMiddleware} from "../../core/middlewares/validation/input-validtion-result.middleware";
+import {blogInputDtoValidation} from "../validation/blog.input-dto.validation-middlewares";
 
 export const blogRouter = Router({});
 
 blogRouter
     .get('', getBlogHandler)
 
-    .get('/:id', getBlogListHandler)
+    .get('/:id', idValidation, inputValidationResultMiddleware, getBlogListHandler)
 
-    .post('', createBlogHandler)
+    .post('', blogInputDtoValidation, inputValidationResultMiddleware, createBlogHandler)
 
-    .put('/:id', updateBlogHandler)
+    .put('/:id', idValidation, blogInputDtoValidation, inputValidationResultMiddleware, updateBlogHandler)
 
-    .delete('/:id', deleteBlogHandler);
+    .delete('/:id', idValidation, inputValidationResultMiddleware, deleteBlogHandler);
