@@ -4,7 +4,7 @@ import {HttpStatus} from "../../../core/types/http-statuses";
 import {createErrorsMessages} from "../../../core/utils/error.utils";
 
 export function getBlogHandler(req: Request, res: Response) {
-    const id = req.params.id.toString();
+    const id = String(req.params.id);
     const blog = blogRepository.findById(id);
 
     if (!blog) {

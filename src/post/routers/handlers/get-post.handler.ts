@@ -4,7 +4,7 @@ import {createErrorsMessages} from "../../../core/utils/error.utils";
 import {postRepository} from "../../repositories/post.repository";
 
 export function getPostHandler(req: Request, res: Response) {
-    const id = req.params.id.toString();
+    const id = String(req.params.id);
     const post = postRepository.findById(id);
 
     if (!post) {
