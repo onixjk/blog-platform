@@ -17,5 +17,15 @@ export const db = {
             websiteUrl: 'blog@gmail.com'
         }
     ],
-    posts: <Post[]>[]
+    posts: <Post[]>[
+        {
+            id: '1',
+            title: 'post1',
+            shortDescription: 'sdf',
+            content: 'sadfdsafsadfsadfsdfsdfsadfsadfsadfsdf',
+            blogId: '1',
+            blogName: 'blog1'
+        },
+
+    ]
 }
