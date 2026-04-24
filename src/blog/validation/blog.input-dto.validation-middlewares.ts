@@ -6,13 +6,13 @@ const nameValidation = body('name')
     .isLength({ max: 15 })
     .withMessage('Length of name is not correct');
 
-const descriptionValidation = body('name')
-    .isString().withMessage('name should be string')
+const descriptionValidation = body('description')
+    .isString().withMessage('Description should be string')
     .trim()
     .isLength({ max: 500 })
-    .withMessage('Length of name is not correct');
+    .withMessage('Length of description is not correct');
 
-const websiteUrlValidation = body('name')
+const websiteUrlValidation = body('websiteUrl')
     .isLength({ max: 100 }).withMessage('Length of email is not correct')
     .isEmail().withMessage('Email is not correct')
     .normalizeEmail()
