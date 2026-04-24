@@ -14,10 +14,26 @@ export const blogRouter = Router({});
 blogRouter
     .get('', getBlogHandler)
 
-    .get('/:id', idValidation, inputValidationResultMiddleware, getBlogListHandler)
+    .get('/:id',
+        idValidation,
+        inputValidationResultMiddleware,
+        getBlogListHandler)
 
-    .post('', superAdminGuardMiddleware, blogInputDtoValidation, inputValidationResultMiddleware, createBlogHandler)
+    .post('',
+        superAdminGuardMiddleware,
+        blogInputDtoValidation,
+        inputValidationResultMiddleware,
+        createBlogHandler)
 
-    .put('/:id', superAdminGuardMiddleware, idValidation, blogInputDtoValidation, inputValidationResultMiddleware, updateBlogHandler)
+    .put('/:id',
+        superAdminGuardMiddleware,
+        idValidation,
+        blogInputDtoValidation,
+        inputValidationResultMiddleware,
+        updateBlogHandler)
 
-    .delete('/:id', superAdminGuardMiddleware, idValidation, inputValidationResultMiddleware, deleteBlogHandler);
+    .delete('/:id',
+        superAdminGuardMiddleware,
+        idValidation,
+        inputValidationResultMiddleware,
+        deleteBlogHandler);
