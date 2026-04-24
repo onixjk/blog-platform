@@ -12,13 +12,13 @@ import {superAdminGuardMiddleware} from "../../auth/middlewares/super-admin.guar
 export const blogRouter = Router({});
 
 blogRouter
-    .get('', getBlogHandler,
+    .get('', getBlogListHandler,
     )
 
     .get('/:id',
         idValidation,
         inputValidationResultMiddleware,
-        getBlogListHandler,
+        getBlogHandler,
     )
 
     .post('',

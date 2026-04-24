@@ -12,13 +12,14 @@ import {inputValidationResultMiddleware} from "../../core/middlewares/validation
 export const postRouter = Router({});
 
 postRouter
-    .get('', getPostHandler,
+    .get('',
+        getPostListHandler,
     )
 
     .get('/:id',
         idValidation,
         inputValidationResultMiddleware,
-        getPostListHandler,
+        getPostHandler
     )
 
     .post('',
