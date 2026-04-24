@@ -34,7 +34,7 @@ export const postRepository = {
     delete(id: string): void {
         const index = db.posts.findIndex(p => p.id === id);
 
-        if (index > -1) {
+        if (index === -1) {
             throw new Error("Blog doesn't exist");
         }
 
