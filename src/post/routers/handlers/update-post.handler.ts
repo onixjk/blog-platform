@@ -5,7 +5,7 @@ import {PostInputDto} from "../../dto/post.input-dto";
 import {postRepository} from "../../repositories/post.repository";
 
 
-export function updatePOSTHandler(
+export function updatePostHandler(
     req: Request<{ id: string }, {}, PostInputDto>,
     res: Response
 ) {
