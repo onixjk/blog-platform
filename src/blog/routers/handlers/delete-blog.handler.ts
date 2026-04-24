@@ -3,8 +3,8 @@ import {blogRepository} from "../../repositories/blog.repository";
 import {HttpStatus} from "../../../core/types/http-statuses";
 import {createErrorsMessages} from "../../../core/utils/error.utils";
 
-export function deleteBlogHandler(req: Request<{id: string}>, res: Response) {
-    const id = req.params.id;
+export function deleteBlogHandler(req: Request, res: Response) {
+    const id = String(req.params.id);
     const blog = blogRepository.findById(id);
 
     if (!blog) {

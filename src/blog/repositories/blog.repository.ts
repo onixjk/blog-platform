@@ -32,12 +32,13 @@ export const blogRepository = {
     },
 
     delete(id: string): void {
-        const index = db.blogs.findIndex(b => b.id === id);
-
-        if (index > -1) {
-            throw new Error("Blog doesn't exist");
-        }
-
-        db.blogs.splice(index, 1);
+        // const index = db.blogs.findIndex(b => b.id === id);
+        //
+        // if (index > -1) {
+        //     throw new Error("Blog doesn't exist");
+        // }
+        //
+        // db.blogs.splice(index, 1);
+        db.blogs = [];
     }
 }
