@@ -1,8 +1,8 @@
 import {Request, Response} from 'express';
 import {HttpStatus} from "../../../core/types/http-statuses";
 import {createErrorsMessages} from "../../../core/utils/error.utils";
-import {postRepository} from "../../../blog/repositories/postRepository";
 import {PostInputDto} from "../../dto/post.input-dto";
+import {postRepository} from "../post.repository";
 
 
 export function updatePOSTHandler(
