@@ -1,7 +1,7 @@
 import {Request, Response} from 'express';
 import {HttpStatus} from "../../../core/types/http-statuses";
 import {createErrorsMessages} from "../../../core/utils/error.utils";
-import {postRepository} from "../post.repository";
+import {postRepository} from "../../repositories/post.repository";
 
 export function getPostHandler(req: Request, res: Response) {
     const id = req.params.id.toString();

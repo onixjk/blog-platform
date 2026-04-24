@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {postRepository} from "../post.repository";
+import {postRepository} from "../../repositories/post.repository";
 
 
 export function getBlogListHandler(req: Request, res: Response) {

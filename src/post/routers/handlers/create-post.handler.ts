@@ -3,7 +3,7 @@ import {db} from "../../../db/in-memory.db";
 import {HttpStatus} from "../../../core/types/http-statuses";
 import {PostInputDto} from "../../dto/post.input-dto";
 import {Post} from "../../types/post";
-import {postRepository} from "../post.repository";
+import {postRepository} from "../../repositories/post.repository";
 
 export function createPostHandler(
     req: Request<{}, {}, PostInputDto>,
