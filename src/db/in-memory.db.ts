@@ -26,6 +26,14 @@ export const db = {
             blogId: '1',
             blogName: 'blog1'
         },
+        {
+            id: '2',
+            title: 'post2',
+            shortDescription: 'sdf',
+            content: 'sadfdsafsadfsadfsdfsdfsadfsadfsadfsdf',
+            blogId: '2',
+            blogName: 'blog2'
+        },
 
     ]
 }
