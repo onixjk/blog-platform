@@ -8,6 +8,13 @@ export const db = {
             name: 'blog1',
             description: 'asasdfgag',
             websiteUrl: 'blog@gmail.com'
+        },
+
+        {
+            id: '2',
+            name: 'blog2',
+            description: 'asasdfgag',
+            websiteUrl: 'blog@gmail.com'
         }
     ],
     posts: <Post[]>[]
