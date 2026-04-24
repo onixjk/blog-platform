@@ -9,7 +9,7 @@ export const superAdminGuardMiddleware = (
     res: Response,
     next: NextFunction,
 ) => {
-    const auth = req.headers['authorization'] as string; // 'Basic xxxx'
+    const auth = req.headers['Authorization'] as string; // 'Basic xxxx'
 
     if (!auth) {
         res.sendStatus(HttpStatus.Unauthorized_401);
