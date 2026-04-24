@@ -9,5 +9,6 @@ export const db = {
             description: 'asasdfgag',
             websiteUrl: 'blog@gmail.com'
         }
-    ]
+    ],
+    posts: <Post[]>[]
 }
