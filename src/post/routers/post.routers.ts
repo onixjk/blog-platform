@@ -23,23 +23,23 @@ postRouter
     )
 
     .post('',
-        superAdminGuardMiddleware,
         postInputDtoValidation,
         inputValidationResultMiddleware,
+        superAdminGuardMiddleware,
         createPostHandler,
     )
 
     .put('/:id',
         idValidation,
-        superAdminGuardMiddleware,
         updatePostHandler,
         inputValidationResultMiddleware,
+        superAdminGuardMiddleware,
         postInputDtoValidation,
     )
 
     .delete('/:id',
         idValidation,
-        superAdminGuardMiddleware,
         inputValidationResultMiddleware,
+        superAdminGuardMiddleware,
         deletePostHandler,
     );
