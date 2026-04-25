@@ -27,7 +27,7 @@ export const superAdminGuardMiddleware = (
 
     const [username, password] = credentials.split(':'); //admin:qwerty
 
-    if (username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) {
+    if (username !== 'admin' || password !== 'qwerty') {
         res.sendStatus(HttpStatus.Unauthorized_401);
         return;
     }
