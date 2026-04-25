@@ -10,6 +10,7 @@ export const setupApp = (app: Express) => {
 
     app.use(cors());
     app.use(express.json());
+
     app.use(BLOGS_PATH, blogRouter)
     app.use(POSTS_PATH, postRouter)
     app.use(TESTING_PATH, testingRouter)

@@ -9,41 +9,29 @@ export const superAdminGuardMiddleware = (
     res: Response,
     next: NextFunction,
 ) => {
-    const auth = req.headers['authorization'];
-    console.log('--- DEBUG AUTH ---');
-    console.log('Header:', auth);
 
-    if (!auth) return res.sendStatus(401);
+    const auth = req.headers['authorization'] as string; // 'Basic xxxx'
 
-    const [type, token] = auth.split(' ');
-    const decoded = Buffer.from(token, 'base64').toString('utf-8');
-    console.log('Decoded credentials:', decoded);
+    if (!auth) {
+        res.sendStatus(HttpStatus.Unauthorized_401);
+        return;
+    }
 
-    // Оставляем пока next(), чтобы увидеть логи всех тестов
+    const [authType, token] = auth.split(' ');
+
+    if (authType !== 'Basic') {
+        res.sendStatus(HttpStatus.Unauthorized_401);
+        return;
+    }
+
+    const credentials = Buffer.from(token, 'base64').toString('utf-8'); //dbcadkcnasdk
+
+    const [username, password] = credentials.split(':'); //admin:qwerty
+
+    if (username !== 'admin' || password !== 'werty') {
+        res.sendStatus(HttpStatus.Unauthorized_401);
+        return;
+    }
+
     next();
 };
-//     const auth = req.headers['authorization'] as string; // 'Basic xxxx'
-//
-//     if (!auth) {
-//         res.sendStatus(HttpStatus.Unauthorized_401);
-//         return;
-//     }
-//
-//     const [authType, token] = auth.split(' ');
-//
-//     if (authType !== 'Basic') {
-//         res.sendStatus(HttpStatus.Unauthorized_401);
-//         return;
-//     }
-//
-//     const credentials = Buffer.from(token, 'base64').toString('utf-8'); //dbcadkcnasdk
-//
-//     const [username, password] = credentials.split(':'); //admin:qwerty
-//
-//     if (username !== 'admin' || password !== 'werty') {
-//         res.sendStatus(HttpStatus.Unauthorized_401);
-//         return;
-//     }
-//
-//     next();
-// };
