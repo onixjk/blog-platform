@@ -5,7 +5,7 @@ import {NextFunction, Request, Response} from "express";
 import {HttpStatus} from "../../types/http-statuses";
 
 export const createErrorMessages = (errors: ValidationErrorType[]): ValidationErrorDto => {
-    return {errorMessages: errors};
+    return {errorsMessages: errors};
 };
 
 const formatErrors = (error: ValidationError): ValidationErrorType => {
