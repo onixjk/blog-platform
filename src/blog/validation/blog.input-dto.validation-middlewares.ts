@@ -4,7 +4,7 @@ const nameValidation = body('name')
     .exists().withMessage('name is required')
     .isString().withMessage('name should be string')
     .trim()
-    .isLength({ max: 15 })
+    .isLength({ min: 1, max: 15 })
     .withMessage('Length of name is not correct');
 
 const descriptionValidation = body('description')
