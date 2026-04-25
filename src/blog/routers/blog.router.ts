@@ -29,7 +29,7 @@ blogRouter
     )
 
     .put('/:id',
-        // superAdminGuardMiddleware,
+        superAdminGuardMiddleware,
         idValidation,
         blogInputDtoValidation,
         inputValidationResultMiddleware,
