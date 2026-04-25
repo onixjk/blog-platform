@@ -1,5 +1,5 @@
-import { NextFunction, Request, Response } from 'express';
-import { HttpStatus } from '../../core/types/http-statuses';
+import {NextFunction, Request, Response} from 'express';
+import {HttpStatus} from '../../core/types/http-statuses';
 
 export const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
 export const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'qwerty';
@@ -9,27 +9,26 @@ export const superAdminGuardMiddleware = (
     res: Response,
     next: NextFunction,
 ) => {
-    // const auth = req.headers['authorization'] as string; // 'Basic xxxx'
-    //
-    // if (!auth) {
-    //     res.sendStatus(HttpStatus.Unauthorized_401);
-    //     return;
-    // }
-    //
-    // // Извлекаем токен (всё, что после "Basic ")
-    // const token = auth.substring(6);
-    // const credentials = Buffer.from(token, 'base64').toString('utf-8');
-    //
-    // // Сравниваем напрямую со строкой 'admin:qwerty'
-    // // Это исключит любые проблемы с переменными окружения и парсингом
-    // if (credentials !== 'admin:qwerty') {
-    //     res.sendStatus(HttpStatus.Unauthorized_401);
-    //     return;
-    // }
+    const auth = req.headers['authorization'];
+    console.log('--- DEBUG AUTH ---');
+    console.log('Header:', auth);
 
+    if (!auth) return res.sendStatus(401);
+
+    const [type, token] = auth.split(' ');
+    const decoded = Buffer.from(token, 'base64').toString('utf-8');
+    console.log('Decoded credentials:', decoded);
+
+    // Оставляем пока next(), чтобы увидеть логи всех тестов
     next();
 };
-
+//     const auth = req.headers['authorization'] as string; // 'Basic xxxx'
+//
+//     if (!auth) {
+//         res.sendStatus(HttpStatus.Unauthorized_401);
+//         return;
+//     }
+//
 //     const [authType, token] = auth.split(' ');
 //
 //     if (authType !== 'Basic') {
