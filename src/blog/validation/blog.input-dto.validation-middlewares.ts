@@ -14,10 +14,10 @@ const descriptionValidation = body('description')
 
 const websiteUrlValidation = body('websiteUrl')
     .isLength({ max: 100 }).withMessage('Length of email is not correct')
-    .isEmail().withMessage('Email is not correct')
-    .normalizeEmail()
-    .matches(/^https:\/\/([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*\/?$/)
-    .withMessage('Email address should be valid')
+    // .isEmail().withMessage('Email is not correct')
+    // .normalizeEmail()
+    // .matches(/^https:\/\/([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*\/?$   /)
+    // .withMessage('Email address should be valid')
 
 export const blogInputDtoValidation = [
     nameValidation,
