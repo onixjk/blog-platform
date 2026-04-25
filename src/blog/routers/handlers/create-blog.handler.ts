@@ -17,5 +17,5 @@ export function createBlogHandler(
     };
 
     blogRepository.create(newBlog);
-    res.status(HttpStatus.Created_201).send({newBlog});
+    res.status(HttpStatus.Created_201).send(newBlog);
 }
