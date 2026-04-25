@@ -23,7 +23,7 @@ postRouter
     )
 
     .post('',
-        superAdminGuardMiddleware,
+        // superAdminGuardMiddleware,
         postInputDtoValidation,
         inputValidationResultMiddleware,
         createPostHandler,
