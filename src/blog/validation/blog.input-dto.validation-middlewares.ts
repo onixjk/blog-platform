@@ -17,7 +17,7 @@ const websiteUrlValidation = body('websiteUrl')
     .isEmail().withMessage('Email is not correct')
     .normalizeEmail()
     .matches(/([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*\/?$/)
-    // .withMessage('Email address should be valid')
+    .withMessage('Email address should be valid')
 
 export const blogInputDtoValidation = [
     nameValidation,
