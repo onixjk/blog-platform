@@ -22,14 +22,14 @@ blogRouter
     )
 
     .post('',
-        superAdminGuardMiddleware,
+        // superAdminGuardMiddleware,
         blogInputDtoValidation,
         inputValidationResultMiddleware,
         createBlogHandler,
     )
 
     .put('/:id',
-        superAdminGuardMiddleware,
+        // superAdminGuardMiddleware,
         idValidation,
         blogInputDtoValidation,
         inputValidationResultMiddleware,
@@ -37,7 +37,7 @@ blogRouter
     )
 
     .delete('/:id',
-        superAdminGuardMiddleware,
+        // superAdminGuardMiddleware,
         idValidation,
         inputValidationResultMiddleware,
         deleteBlogHandler,
