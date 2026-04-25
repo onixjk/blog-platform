@@ -1,26 +1,16 @@
-//{
-//  "version": 2,
-//  "name": "blog-platform",
-//  "builds": [
-//    {
-//      "src": "src/index.ts",
-//      "use": "@vercel/node"
-//    }
-//  ],
-//  "routes": [
-//    {
-//      "src": "/(.*)",
-//      "dest": "src/index.ts"
-//    }
-//  ]
-//}
-
 {
   "version": 2,
-  "rewrites": [
+  "name": "blog-platform",
+  "builds": [
     {
-      "source": "/(.*)",
-      "destination": "src/index.ts"
+      "src": "src/index.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/index.ts"
     }
   ]
 }
