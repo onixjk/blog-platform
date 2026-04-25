@@ -10,12 +10,12 @@ const nameValidation = body('name')
 const descriptionValidation = body('description')
     .isString().withMessage('Description should be string')
     .trim()
-    .isLength({ max: 500 })
+    .isLength({min:1, max: 500 })
     .withMessage('Length of description is not correct');
 
 const websiteUrlValidation = body('websiteUrl')
     .trim()
-    .isLength({ max: 100 }).withMessage('Length of email is not correct')
+    .isLength({min:1, max: 100 }).withMessage('Length of email is not correct')
     .isURL().withMessage('URL is required')
     .matches(/^https:\/\/([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*\/?$/)
     .withMessage('Invalid URL format, must match the pattern');
