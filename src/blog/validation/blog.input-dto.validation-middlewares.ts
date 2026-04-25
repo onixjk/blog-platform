@@ -14,11 +14,12 @@ const descriptionValidation = body('description')
     .withMessage('Length of description is not correct');
 
 const websiteUrlValidation = body('websiteUrl')
+    .trim()
     .isLength({ max: 100 }).withMessage('Length of email is not correct')
-    // .isEmail().withMessage('Email is not correct')
-    // .normalizeEmail()
-    // .matches(/^https:\/\/([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*\/?$   /)
-    // .withMessage('Email address should be valid')
+    .isURL().withMessage('URL is required')
+    .matches(/^https:\/\/([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*\/?$/)
+    .withMessage('Invalid URL format, must match the pattern');
+
 
 export const blogInputDtoValidation = [
     nameValidation,
