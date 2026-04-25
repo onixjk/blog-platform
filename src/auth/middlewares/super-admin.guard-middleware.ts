@@ -25,7 +25,14 @@ export const superAdminGuardMiddleware = (
 
     const credentials = Buffer.from(token, 'base64').toString('utf-8'); //dbcadkcnasdk
 
-    const [username, password] = credentials.split(':'); //admin:qwerty
+    const [username, password] = credentials.trim().split(':'); //admin:qwerty
+
+    console.log({
+        receivedRaw: auth,
+        decoded: credentials,
+        expectedUser: ADMIN_USERNAME,
+        expectedPass: ADMIN_PASSWORD
+    });
 
     if (username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) {
         res.sendStatus(HttpStatus.Unauthorized_401);
