@@ -7,7 +7,8 @@ const titleValidation = body('title')
     .withMessage('Length of title is not correct');
 
 const shortDescriptionValidation = body('shortDescription')
-    .isString().withMessage('ShortDescription should be string')
+    .isString()
+    .withMessage('ShortDescription should be string')
     .trim()
     .isLength({min:1, max: 100})
     .withMessage('Length of shortDescription is not correct');
