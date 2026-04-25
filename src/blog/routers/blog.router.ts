@@ -29,16 +29,16 @@ blogRouter
     )
 
     .put('/:id',
-        superAdminGuardMiddleware,
         idValidation,
+        superAdminGuardMiddleware,
         blogInputDtoValidation,
         inputValidationResultMiddleware,
         updateBlogHandler,
     )
 
     .delete('/:id',
-        superAdminGuardMiddleware,
         idValidation,
+        superAdminGuardMiddleware,
         inputValidationResultMiddleware,
         deleteBlogHandler,
     );
