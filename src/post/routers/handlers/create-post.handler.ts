@@ -19,5 +19,5 @@ export function createPostHandler(
     };
 
     postRepository.create(newPost);
-    res.status(HttpStatus.Created_201).send({newPost});
+    res.status(HttpStatus.Created_201).send(newPost);
 }
