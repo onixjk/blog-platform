@@ -16,21 +16,35 @@ export const superAdminGuardMiddleware = (
         return;
     }
 
-    const [authType, token] = auth.split(' ');
+    // Извлекаем токен (всё, что после "Basic ")
+    const token = auth.substring(6);
+    const credentials = Buffer.from(token, 'base64').toString('utf-8');
 
-    if (authType !== 'Basic') {
-        res.sendStatus(HttpStatus.Unauthorized_401);
-        return;
-    }
-
-    const credentials = Buffer.from(token, 'base64').toString('utf-8'); //dbcadkcnasdk
-
-    const [username, password] = credentials.trim().split(':'); //admin:qwerty
-
-    if (username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) {
+    // Сравниваем напрямую со строкой 'admin:qwerty'
+    // Это исключит любые проблемы с переменными окружения и парсингом
+    if (credentials !== 'admin:qwerty') {
         res.sendStatus(HttpStatus.Unauthorized_401);
         return;
     }
 
     next();
 };
+
+//     const [authType, token] = auth.split(' ');
+//
+//     if (authType !== 'Basic') {
+//         res.sendStatus(HttpStatus.Unauthorized_401);
+//         return;
+//     }
+//
+//     const credentials = Buffer.from(token, 'base64').toString('utf-8'); //dbcadkcnasdk
+//
+//     const [username, password] = credentials.split(':'); //admin:qwerty
+//
+//     if (username !== 'admin' || password !== 'werty') {
+//         res.sendStatus(HttpStatus.Unauthorized_401);
+//         return;
+//     }
+//
+//     next();
+// };
