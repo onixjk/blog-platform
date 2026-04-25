@@ -4,38 +4,6 @@ import {HttpStatus} from '../../core/types/http-statuses';
 export const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
 export const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'qwerty';
 
-// export const superAdminGuardMiddleware = (req: Request, res: Response, next: NextFunction) => {
-//     // Попробуйте вытащить ВООБЩЕ все заголовки, чтобы увидеть их в логах
-//     console.log('ALL HEADERS:', JSON.stringify(req.headers));
-//
-//     const auth = req.headers.authorization; // Express автоматически приводит к нижнему регистру
-//
-//     if (!auth) {
-//         console.log('NO AUTH HEADER FOUND');
-//         res.sendStatus(401);
-//         return;
-//     }
-//
-//     const [authType, token] = auth.split(' ');
-//
-//     if (authType !== 'Basic') {
-//         res.sendStatus(HttpStatus.Unauthorized_401);
-//         return;
-//     }
-//
-//     const credentials = Buffer.from(token, 'base64').toString('utf-8'); //dbcadkcnasdk
-//
-//     const [username, password] = credentials.split(':'); //admin:qwerty
-//
-//     if (username !== 'admin' || password !== 'werty') {
-//         res.sendStatus(HttpStatus.Unauthorized_401);
-//         return;
-//     }
-//
-//     next();
-// };
-
-
 export const superAdminGuardMiddleware = (
     req: Request,
     res: Response,
@@ -60,7 +28,7 @@ export const superAdminGuardMiddleware = (
 
     const [username, password] = credentials.split(':'); //admin:qwerty
 
-    if (username !== 'admin' || password !== 'qwerty') {
+    if (username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) {
         res.sendStatus(HttpStatus.Unauthorized_401);
         return;
     }
