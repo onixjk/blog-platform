@@ -20,10 +20,10 @@ export function createPostHandler(
             shortDescription: req.body.shortDescription,
             content: req.body.content,
             blogId: req.body.blogId,
-            blogName: blog?.name,
+            blogName: blog.name,
         };
 
-        postRepository.create(newPost, blog.name);
+        postRepository.create(newPost);
         res.status(HttpStatus.Created_201).send(newPost);
     } else {
         res

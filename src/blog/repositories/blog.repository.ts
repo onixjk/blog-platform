@@ -38,6 +38,7 @@ export const blogRepository = {
             throw new Error("Blog doesn't exist");
         }
 
+        db.posts = db.posts.filter(p => p.blogId !== id);
         db.blogs.splice(index, 1);
     }
 }
