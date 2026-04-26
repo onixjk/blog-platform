@@ -17,6 +17,7 @@ export function updatePostHandler(
         res
             .status(HttpStatus.NotFound_404)
             .send(createErrorsMessages([{message: "Post not found", field: "id"}]));
+        return;
     }
 
     postRepository.update(id, req.body);
