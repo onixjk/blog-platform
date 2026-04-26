@@ -27,14 +27,6 @@ export const blogRepository = {
         blog.name = dto.name;
         blog.description = dto.description;
         blog.websiteUrl = dto.websiteUrl;
-
-        db.posts.forEach(p => {
-            if (p.blogId === id) {
-                p.blogName = dto.name;
-            }
-        });
-
-        return;
     },
 
     delete(id: string): void {
@@ -44,7 +36,6 @@ export const blogRepository = {
             throw new Error("Blog doesn't exist");
         }
 
-        db.posts = db.posts.filter(p => p.blogId !== id);
         db.blogs.splice(index, 1);
     }
 }

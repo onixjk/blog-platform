@@ -20,6 +20,15 @@ export function updatePostHandler(
         return;
     }
 
-    postRepository.update(id, req.body);
+    const blog = blogRepository.findById(req.body.blogId)
+
+    if (!blog) {
+        res
+            .status(HttpStatus.NotFound_404)
+            .send(createErrorsMessages([{message: "Blog not found", field: "id"}]));
+        return;
+    }
+
+    postRepository.update(id, req.body, blog.name);
     res.sendStatus(HttpStatus.NoContent_204);
 }

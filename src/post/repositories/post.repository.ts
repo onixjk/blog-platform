@@ -1,7 +1,6 @@
 import {db} from "../../db/in-memory.db";
 import {Post} from "../types/post";
 import {PostInputDto} from "../dto/post.input-dto";
-import {blogRepository} from "../../blog/repositories/blog.repository";
 
 export const postRepository = {
     findAll(): Post[] {
@@ -17,26 +16,18 @@ export const postRepository = {
         return newPost;
     },
 
-    update(id: string, dto: PostInputDto): void {
+    update(id: string, dto: PostInputDto, blogName: string): void {
         const post = db.posts.find(p => p.id === id);
 
         if (!post) {
             throw new Error("Post doesn't exist");
         }
 
-        const blog = blogRepository.findById(dto.blogId)
-
-        if (!blog) {
-            throw new Error("Blog not found");
-        }
-
         post.title = dto.title;
         post.shortDescription = dto.shortDescription;
         post.content = dto.content;
         post.blogId = dto.blogId;
-        post.blogName = blog.name;
-
-        return;
+        post.blogName = blogName;
     },
 
     delete(id: string): void {

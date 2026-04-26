@@ -15,7 +15,7 @@ const descriptionValidation = body('description')
 
 const websiteUrlValidation = body('websiteUrl')
     .trim()
-    .isLength({min:1, max: 100 }).withMessage('Length of email is not correct')
+    .isLength({min:1, max: 100 }).withMessage('Length of URL is not correct')
     .isURL().withMessage('URL is required')
     .matches(/^https:\/\/([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*\/?$/)
     .withMessage('Invalid URL format, must match the pattern');
