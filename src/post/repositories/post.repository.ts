@@ -11,7 +11,7 @@ export const postRepository = {
         return db.posts.find(p => p.id === id) ?? null;
     },
 
-    create(newPost: Post): Post {
+    create(newPost: Post, blog: string): Post {
         db.posts.push(newPost);
         return newPost;
     },
