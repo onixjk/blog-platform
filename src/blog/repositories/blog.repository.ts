@@ -28,6 +28,12 @@ export const blogRepository = {
         blog.description = dto.description;
         blog.websiteUrl = dto.websiteUrl;
 
+        db.posts.forEach(p => {
+            if (p.blogId === id) {
+                p.blogName = dto.name;
+            }
+        });
+
         return;
     },
 
