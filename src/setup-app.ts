@@ -1,9 +1,9 @@
 
 import express, { Express } from "express";
 import {BLOGS_PATH, POSTS_PATH, TESTING_PATH} from "./core/paths/paths";
-import {blogRouter} from "./blog/routers/blog.router";
-import {testingRouter} from "./testing/routers/testing.router";
-import {postRouter} from "./post/routers/post.routers";
+import {blogRouter} from "./modules/blog/routers/blog.router";
+import {testingRouter} from "./modules/testing/routers/testing.router";
+import {postRouter} from "./modules/post/routers/post.routers";
 import cors from 'cors';
 
 export const setupApp = (app: Express) => {

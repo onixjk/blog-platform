@@ -1,4 +1,4 @@
-import {db} from "../../db/in-memory.db";
+import {db} from "../../../db/in-memory.db";
 import {Post} from "../types/post";
 import {PostInputDto} from "../dto/post.input-dto";
 

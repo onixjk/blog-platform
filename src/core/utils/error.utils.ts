@@ -1,4 +1,4 @@
-import {ValidationError} from "../../blog/types/validationError";
+import {ValidationError} from "../../modules/blog/types/validationError";
 
 export const createErrorsMessages = (
     errors: ValidationError[]

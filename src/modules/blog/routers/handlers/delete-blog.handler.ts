@@ -1,8 +1,8 @@
 import {Request, Response} from 'express';
 import {blogRepository} from "../../repositories/blog.repository";
-import {HttpStatus} from "../../../core/types/http-statuses";
-import {createErrorsMessages} from "../../../core/utils/error.utils";
-import {db} from "../../../db/in-memory.db";
+import {HttpStatus} from "../../../../core/types/http-statuses";
+import {createErrorsMessages} from "../../../../core/utils/error.utils";
+import {db} from "../../../../db/in-memory.db";
 
 export function deleteBlogHandler(req: Request, res: Response) {
     const id = String(req.params.id);

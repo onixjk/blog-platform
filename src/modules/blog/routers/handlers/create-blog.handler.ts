@@ -1,7 +1,7 @@
 import {Request, Response} from 'express';
 import {blogRepository} from "../../repositories/blog.repository";
-import {HttpStatus} from "../../../core/types/http-statuses";
-import {db} from "../../../db/in-memory.db";
+import {HttpStatus} from "../../../../core/types/http-statuses";
+import {db} from "../../../../db/in-memory.db";
 import {Blog} from "../../types/blog";
 import {BlogInputDto} from "../../dto/blog.input-dto";
 

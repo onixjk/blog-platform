@@ -1,9 +1,9 @@
 import {Request, Response} from 'express';
-import {HttpStatus} from "../../../core/types/http-statuses";
-import {createErrorsMessages} from "../../../core/utils/error.utils";
+import {HttpStatus} from "../../../../core/types/http-statuses";
+import {createErrorsMessages} from "../../../../core/utils/error.utils";
 import {postRepository} from "../../repositories/post.repository";
 
-export function getPostHandler(req: Request, res: Response) {
+export function deletePostHandler(req: Request, res: Response) {
     const id = String(req.params.id);
     const post = postRepository.findById(id);
 
@@ -14,5 +14,6 @@ export function getPostHandler(req: Request, res: Response) {
         return;
     }
 
-    res.send(post);
+    postRepository.delete(id);
+    res.sendStatus(HttpStatus.NoContent_204);
 }

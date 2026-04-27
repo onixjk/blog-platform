@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import {blogRepository} from "../../repositories/blog.repository";
-import {HttpStatus} from "../../../core/types/http-statuses";
-import {createErrorsMessages} from "../../../core/utils/error.utils";
+import {HttpStatus} from "../../../../core/types/http-statuses";
+import {createErrorsMessages} from "../../../../core/utils/error.utils";
 
 export function getBlogHandler(req: Request, res: Response) {
     const id = String(req.params.id);

@@ -1,11 +1,11 @@
 import {Request, Response} from "express";
-import {db} from "../../../db/in-memory.db";
-import {HttpStatus} from "../../../core/types/http-statuses";
+import {db} from "../../../../db/in-memory.db";
+import {HttpStatus} from "../../../../core/types/http-statuses";
 import {PostInputDto} from "../../dto/post.input-dto";
 import {Post} from "../../types/post";
 import {postRepository} from "../../repositories/post.repository";
 import {blogRepository} from "../../../blog/repositories/blog.repository";
-import {createErrorsMessages} from "../../../core/utils/error.utils";
+import {createErrorsMessages} from "../../../../core/utils/error.utils";
 
 export function createPostHandler(
     req: Request<{}, {}, PostInputDto>,

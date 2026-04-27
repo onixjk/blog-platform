@@ -1,5 +1,5 @@
-import {Blog} from "../blog/types/blog";
-import {Post} from "../post/types/post";
+import {Blog} from "../modules/blog/types/blog";
+import {Post} from "../modules/post/types/post";
 
 export const db = {
     blogs: <Blog[]>[
