@@ -24,8 +24,7 @@ export function updateBlogHandler(
         if (p.blogId === id && p.blogName !== dtoBlogName) {
             p.blogName = dtoBlogName;
         }
-    })
-
+    });
 
     blogRepository.update(id, req.body);
     res.sendStatus(HttpStatus.NoContent_204);
