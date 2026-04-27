@@ -10,6 +10,7 @@ export function updateBlogHandler(
     res: Response
 ) {
     const id = req.params.id;
+    const dtoBlogName = req.body.name
     const blog = blogRepository.findById(id);
 
     if (!blog) {
@@ -20,10 +21,12 @@ export function updateBlogHandler(
     }
 
     db.posts.forEach(p => {
-        if (p.blogId === id) {
-            p.blogName = blog.name;
+        if (p.blogId === id && p.blogName !== dtoBlogName
+        ) {
+            p.blogName = dtoBlogName;
         }
-    });
+    })
+
 
     blogRepository.update(id, req.body);
     res.sendStatus(HttpStatus.NoContent_204);
