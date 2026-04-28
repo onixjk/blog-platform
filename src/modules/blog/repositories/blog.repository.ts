@@ -9,22 +9,15 @@ export const blogRepository = {
 
     async findAll(): Promise<WithId<Blog>[]> {
         return blogCollection.find().toArray();
-
-        // return db.blogs
     },
 
     async findById(id: string): Promise<WithId<Blog> | null> {
         return blogCollection.findOne({_id: new ObjectID(id)});
-
-        // return db.blogs.find(b => b.id === id) ?? null;
     },
 
     async create(newBlog: Blog): Promise<WithId<Blog>>{
         const insertResult = blogCollection.insertOne(newBLog)
         return { ... newBlog, _id: insertResult.insertedId };
-
-        // db.blogs.push(newBlog);
-        // return newBlog;
     },
 
     update(id: string, dto: BlogInputDto): void {
