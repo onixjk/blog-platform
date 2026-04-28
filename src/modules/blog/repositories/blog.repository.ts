@@ -1,4 +1,3 @@
-import {db} from "../../../db/in-memory.db";
 import {BlogInputDto} from "../dto/blog.input-dto";
 import {Blog} from "../types/blog";
 import {blogCollection} from "../../../db/mongo.db";
@@ -15,30 +14,37 @@ export const blogRepository = {
         return blogCollection.findOne({_id: new ObjectID(id)});
     },
 
-    async create(newBlog: Blog): Promise<WithId<Blog>>{
+    async create(newBlog: Blog): Promise<WithId<Blog>> {
         const insertResult = blogCollection.insertOne(newBLog)
-        return { ... newBlog, _id: insertResult.insertedId };
+        return {...newBlog, _id: insertResult.insertedId};
     },
 
-    update(id: string, dto: BlogInputDto): void {
-        const blog = db.blogs.find(b => b.id === id);
+    async update(id: string, dto: BlogInputDto): Promise<void> {
+        const updateResult = await blogCollection.updateOne(
+            {
+                _id: new ObjectId(id),
+            },
+            {
+                $set: {
+                    name = dto.name,
+                    description = dto.description,
+                    websiteUrl = dto.websiteUrl,
+                },
+            },
+        );
 
-        if (!blog) {
+        if (updateResult.matchedCount < 1) {
             throw new Error("Blog doesn't exist");
         }
-
-        blog.name = dto.name;
-        blog.description = dto.description;
-        blog.websiteUrl = dto.websiteUrl;
+        return;
     },
 
-    delete(id: string): void {
-        const index = db.blogs.findIndex(b => b.id === id);
+    async delete(id: string): Promise<void> {
+        const deleteResult = await blogCollection.deleteOne({_id: new ObjectId(id)});
 
-        if (index === -1) {
+        if (deleteResult.deletedCount < 1) {
             throw new Error("Blog doesn't exist");
         }
-
-        db.blogs.splice(index, 1);
+        return;
     }
 }
