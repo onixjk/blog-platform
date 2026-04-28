@@ -9,7 +9,7 @@ export async function createBlogHandler(
     req: Request<{}, {}, BlogInputDto>,
     res: Response
 ) {
-    // try {
+    try {
         const newBlog: Blog = {
             name: req.body.name,
             description: req.body.description,
@@ -19,7 +19,7 @@ export async function createBlogHandler(
         const createdBlog = await blogRepository.create(newBlog);
         const blogViewModel = mapToBlogViewModel(createdBlog);
         res.status(HttpStatus.Created_201).send(blogViewModel);
-    // } catch (e: unknown) {
-    //     res.sendStatus(HttpStatus.InternalServerError_500)
-    // }
+    } catch (e: unknown) {
+        res.sendStatus(HttpStatus.InternalServerError_500)
+    }
 }
