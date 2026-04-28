@@ -3,29 +3,32 @@ import {blogRepository} from "../../repositories/blog.repository";
 import {HttpStatus} from "../../../../core/types/http-statuses";
 import {createErrorsMessages} from "../../../../core/utils/error.utils";
 import {BlogInputDto} from "../../dto/blog.input-dto";
-import {db} from "../../../../db/in-memory.db";
+import {postCollection} from "../../../../db/mongo.db";
 
-export function updateBlogHandler(
+export async function updateBlogHandler(
     req: Request<{ id: string }, {}, BlogInputDto>,
     res: Response
 ) {
-    const id = req.params.id;
-    const dtoBlogName = req.body.name
-    const blog = blogRepository.findById(id);
+    try {
+        const id = req.params.id;
+        const dtoBlogName = req.body.name
+        const blog = await blogRepository.findById(id);
 
-    if (!blog) {
-        res
-            .status(HttpStatus.NotFound_404)
-            .send(createErrorsMessages([{message: "Blog not found", field: "id"}]));
-        return;
-    }
-
-    db.posts.forEach(p => {
-        if (p.blogId === id && p.blogName !== dtoBlogName) {
-            p.blogName = dtoBlogName;
+        if (!blog) {
+            res
+                .status(HttpStatus.NotFound_404)
+                .send(createErrorsMessages([{message: "Blog not found", field: "id"}]));
+            return;
         }
-    });
 
-    blogRepository.update(id, req.body);
-    res.sendStatus(HttpStatus.NoContent_204);
+        await postCollection.updateMany(
+            {blogId: id, blogName: {$ne: dtoBlogName}},
+            {$set: {blogName: dtoBlogName}}
+        );
+
+        await blogRepository.update(id, req.body);
+        res.sendStatus(HttpStatus.NoContent_204);
+    } catch (e: unknown) {
+        res.sendStatus(HttpStatus.InternalServerError_500)
+    }
 }
