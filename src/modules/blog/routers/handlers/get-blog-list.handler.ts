@@ -11,5 +11,4 @@ export async function getBlogListHandler(req: Request, res: Response) {
     } catch (e: unknown) {
         res.sendStatus(HttpStatus.InternalServerError_500);
     }
-
 }
