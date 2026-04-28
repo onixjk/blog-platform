@@ -8,7 +8,6 @@ export async function getBlogListHandler(req: Request, res: Response) {
         const blogs = await blogRepository.findAll();
         const blogViewModels = blogs.map(mapToBlogViewModel);
         res.send(blogViewModels);
-        const ad= "asd"
     } catch (e: unknown) {
         res.sendStatus(HttpStatus.InternalServerError_500);
     }
