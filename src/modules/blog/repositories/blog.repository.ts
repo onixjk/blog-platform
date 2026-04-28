@@ -11,11 +11,11 @@ export const blogRepository = {
     },
 
     async findById(id: string): Promise<WithId<Blog> | null> {
-        return blogCollection.findOne({_id: new ObjectID(id)});
+        return blogCollection.findOne({_id: new ObjectId(id)});
     },
 
     async create(newBlog: Blog): Promise<WithId<Blog>> {
-        const insertResult = blogCollection.insertOne(newBLog)
+        const insertResult = blogCollection.insertOne(newBlog)
         return {...newBlog, _id: insertResult.insertedId};
     },
 
@@ -26,9 +26,9 @@ export const blogRepository = {
             },
             {
                 $set: {
-                    name = dto.name,
-                    description = dto.description,
-                    websiteUrl = dto.websiteUrl,
+                    name: dto.name,
+                    description: dto.description,
+                    websiteUrl: dto.websiteUrl,
                 },
             },
         );
