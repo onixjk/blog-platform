@@ -23,9 +23,9 @@ blogRouter
     )
 
     .post('',
-        // superAdminGuardMiddleware,
-        // blogInputDtoValidation,
-        // inputValidationResultMiddleware,
+        superAdminGuardMiddleware,
+        blogInputDtoValidation,
+        inputValidationResultMiddleware,
         createBlogHandler,
     )
 
