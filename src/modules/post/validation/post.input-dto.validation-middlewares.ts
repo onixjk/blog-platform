@@ -3,20 +3,20 @@ import {body} from "express-validator";
 const titleValidation = body('title')
     .isString().withMessage('title should be string')
     .trim()
-    .isLength({min:1, max: 30})
+    .isLength({min: 1, max: 30})
     .withMessage('Length of title is not correct');
 
 const shortDescriptionValidation = body('shortDescription')
     .isString()
     .withMessage('ShortDescription should be string')
     .trim()
-    .isLength({min:1, max: 100})
+    .isLength({min: 1, max: 100})
     .withMessage('Length of shortDescription is not correct');
 
 const contentValidation = body('content')
     .isString().withMessage('Content should be string')
     .trim()
-    .isLength({min:1, max: 1000})
+    .isLength({min: 1, max: 1000})
     .withMessage('Length of content is not correct');
 
 const blogIdValidation = body('blogId')
@@ -27,15 +27,15 @@ const blogIdValidation = body('blogId')
     .isMongoId()
     .withMessage('Incorrect format of ObjectId')
 
-const createdAt = body('createdAt')
-    .exists().withMessage('createdAt is required')
-    // .isISO8601().withMessage('createdAt is required')
-    // .toDate().withMessage('createdAt is required');
+// const createdAt = body('createdAt')
+//     .exists().withMessage('createdAt is required')
+//     .isISO8601().withMessage('createdAt is required')
+//     .toDate().withMessage('createdAt is required');
 
 export const postInputDtoValidation = [
     titleValidation,
     shortDescriptionValidation,
     contentValidation,
     blogIdValidation,
-    createdAt,
+    // createdAt,
 ];
