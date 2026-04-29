@@ -5,7 +5,6 @@ import {createErrorsMessages} from "../../../../core/utils/error.utils";
 import {postCollection} from "../../../../db/mongo.db";
 
 export async function deleteBlogHandler(req: Request, res: Response) {
-
     try {
         const id = String(req.params.id);
         const blog = await blogRepository.findById(id);
