@@ -20,10 +20,12 @@ const contentValidation = body('content')
     .withMessage('Length of content is not correct');
 
 const blogIdValidation = body('blogId')
-    .isString().withMessage('BlogId should be string')
-    .trim()
-    .isLength({min: 1})
-    .withMessage('Length of blogId is not correct');
+    .exists()
+    .withMessage('ID is required') // Проверка на наличие
+    .isString()
+    .withMessage('ID must be a string') // Проверка, что это строка
+    .isMongoId()
+    .withMessage('Incorrect format of ObjectId')
 
 export const postInputDtoValidation = [
     titleValidation,
