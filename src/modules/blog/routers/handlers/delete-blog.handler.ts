@@ -16,7 +16,7 @@ export async function deleteBlogHandler(req: Request, res: Response) {
             return;
         }
 
-        await postCollection.deleteMany({blogId: id});
+        // await postCollection.deleteMany({blogId: id});
         await blogRepository.delete(id);
 
         res.sendStatus(HttpStatus.NoContent_204);

@@ -4,9 +4,9 @@ import {FieldValidationError, ValidationError, validationResult} from "express-v
 import {NextFunction, Request, Response} from "express";
 import {HttpStatus} from "../../types/http-statuses";
 
-export const createErrorMessages = (errors: ValidationErrorType[]): ValidationErrorDto => {
-    return {errorsMessages: errors};
-};
+// export const createErrorMessages = (errors: ValidationErrorType[]): ValidationErrorDto => {
+//     return {errorsMessages: errors};
+// };
 
 const formatErrors = (error: ValidationError): ValidationErrorType => {
     const expressError = error as unknown as FieldValidationError;
