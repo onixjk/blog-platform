@@ -1,0 +1,14 @@
+import {WithId} from "mongodb";
+import {Post} from "../../types/post";
+
+export function mapToBlogViewModel(post: WithId<Post>) {
+    return {
+        id: post._id.toString(),
+        title: post.title,
+        shortDescription: post.shortDescription,
+        content: post.content,
+        blogId: post.blogId,
+        blogName: post.blogName,
+        createdAt: new Date().toISOString(),
+    }
+}
