@@ -3,9 +3,7 @@ import {Blog} from "../types/blog";
 import {blogCollection} from "../../../db/mongo.db";
 import {ObjectId, WithId} from "mongodb";
 
-
 export const blogRepository = {
-
     async findAll(): Promise<WithId<Blog>[]> {
         return blogCollection.find().toArray();
     },
