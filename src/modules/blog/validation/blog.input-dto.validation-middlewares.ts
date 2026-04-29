@@ -21,7 +21,8 @@ const websiteUrlValidation = body('websiteUrl')
     .withMessage('Invalid URL format, must match the pattern');
 
 const createdAt = body('createdAt')
-    .exists().withMessage('createdAt is required')
+    // .isString()
+    // .exists().withMessage('createdAt is required')
     // .isISO8601().withMessage('createdAt is required')
     // .toDate().withMessage('createdAt is required');
 
@@ -34,6 +35,6 @@ export const blogInputDtoValidation = [
     nameValidation,
     descriptionValidation,
     websiteUrlValidation,
-    createdAt,
+    // createdAt,
     // isMembership,
 ];

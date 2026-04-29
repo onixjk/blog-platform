@@ -37,5 +37,5 @@ export const postInputDtoValidation = [
     shortDescriptionValidation,
     contentValidation,
     blogIdValidation,
-    createdAt,
+    // createdAt,
 ];
