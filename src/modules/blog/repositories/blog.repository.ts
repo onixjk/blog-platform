@@ -15,7 +15,7 @@ export const blogRepository = {
     },
 
     async create(newBlog: Blog): Promise<WithId<Blog>> {
-        const insertResult = blogCollection.insertOne(newBlog)
+        const insertResult = await blogCollection.insertOne(newBlog)
         return {...newBlog, _id: insertResult.insertedId};
     },
 
