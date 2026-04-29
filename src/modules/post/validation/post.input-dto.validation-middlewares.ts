@@ -27,9 +27,15 @@ const blogIdValidation = body('blogId')
     .isMongoId()
     .withMessage('Incorrect format of ObjectId')
 
+const createdAt = body('createdAt')
+    .exists().withMessage('createdAt is required')
+    .isISO8601().withMessage('createdAt is required')
+    .toDate().withMessage('createdAt is required');
+
 export const postInputDtoValidation = [
     titleValidation,
     shortDescriptionValidation,
     contentValidation,
     blogIdValidation,
+    createdAt,
 ];
