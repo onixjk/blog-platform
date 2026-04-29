@@ -6,7 +6,7 @@ import {postRepository} from "../../repositories/post.repository";
 export async function deletePostHandler(req: Request, res: Response) {
     try {
         const id = String(req.params.id);
-        const post = postRepository.findById(id);
+        const post = await postRepository.findById(id);
 
         if (!post) {
             res

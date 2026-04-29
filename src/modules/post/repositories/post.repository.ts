@@ -29,7 +29,6 @@ export const postRepository = {
                     content: dto.content,
                     blogId: dto.blogId,
                     blogName: blogName,
-                    // createdAt: new Date().toISOString(),
                 }
             }
         );
