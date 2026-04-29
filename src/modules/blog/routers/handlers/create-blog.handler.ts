@@ -20,6 +20,7 @@ export async function createBlogHandler(
 
         const createdBlog = await blogRepository.create(newBlog);
         const blogViewModel = mapToBlogViewModel(createdBlog);
+
         res.status(HttpStatus.Created_201).send(blogViewModel);
     } catch (e: unknown) {
         res.sendStatus(HttpStatus.InternalServerError_500)
