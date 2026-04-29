@@ -6,29 +6,33 @@ import {postRepository} from "../../repositories/post.repository";
 import {blogRepository} from "../../../blog/repositories/blog.repository";
 
 
-export function updatePostHandler(
+export async function updatePostHandler(
     req: Request<{ id: string }, {}, PostInputDto>,
     res: Response
 ) {
-    const id = req.params.id;
-    const post = postRepository.findById(id);
+    try {
+        const id = req.params.id;
+        const post = await postRepository.findById(id);
 
-    if (!post) {
-        res
-            .status(HttpStatus.NotFound_404)
-            .send(createErrorsMessages([{message: "Post not found", field: "id"}]));
-        return;
+        if (!post) {
+            res
+                .status(HttpStatus.NotFound_404)
+                .send(createErrorsMessages([{message: "Post not found", field: "id"}]));
+            return;
+        }
+
+        const blog = await blogRepository.findById(req.body.blogId)
+
+        if (!blog) {
+            res
+                .status(HttpStatus.NotFound_404)
+                .send(createErrorsMessages([{message: "Blog not found", field: "id"}]));
+            return;
+        }
+
+        await postRepository.update(id, req.body, blog.name);
+        res.sendStatus(HttpStatus.NoContent_204);
+    } catch (e: unknown) {
+        res.sendStatus(HttpStatus.InternalServerError_500)
     }
-
-    const blog = blogRepository.findById(req.body.blogId)
-
-    if (!blog) {
-        res
-            .status(HttpStatus.NotFound_404)
-            .send(createErrorsMessages([{message: "Blog not found", field: "id"}]));
-        return;
-    }
-
-    postRepository.update(id, req.body, blog.name);
-    res.sendStatus(HttpStatus.NoContent_204);
 }
