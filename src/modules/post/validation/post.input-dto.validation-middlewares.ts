@@ -29,8 +29,8 @@ const blogIdValidation = body('blogId')
 
 const createdAt = body('createdAt')
     .exists().withMessage('createdAt is required')
-    .isISO8601().withMessage('createdAt is required')
-    .toDate().withMessage('createdAt is required');
+    // .isISO8601().withMessage('createdAt is required')
+    // .toDate().withMessage('createdAt is required');
 
 export const postInputDtoValidation = [
     titleValidation,

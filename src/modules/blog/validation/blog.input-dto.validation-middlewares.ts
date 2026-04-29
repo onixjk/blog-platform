@@ -22,8 +22,8 @@ const websiteUrlValidation = body('websiteUrl')
 
 const createdAt = body('createdAt')
     .exists().withMessage('createdAt is required')
-    .isISO8601().withMessage('createdAt is required')
-    .toDate().withMessage('createdAt is required');
+    // .isISO8601().withMessage('createdAt is required')
+    // .toDate().withMessage('createdAt is required');
 
 const isMembership = body('isMembership')
     .isBoolean().withMessage('isMembership is required')
