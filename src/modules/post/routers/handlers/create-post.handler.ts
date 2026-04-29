@@ -6,30 +6,35 @@ import {Post} from "../../types/post";
 import {postRepository} from "../../repositories/post.repository";
 import {blogRepository} from "../../../blog/repositories/blog.repository";
 import {createErrorsMessages} from "../../../../core/utils/error.utils";
+import {mapToPostViewModel} from "../mapers/map-to-post-view-model.util";
 
-export function createPostHandler(
+export async function createPostHandler(
     req: Request<{}, {}, PostInputDto>,
     res: Response
 ) {
-    const blog = blogRepository.findById(req.body.blogId)
+    try {
+        const blog = await blogRepository.findById(req.body.blogId)
 
-    if (!blog) {
-        res
-            .status(HttpStatus.NotFound_404)
-            .send(createErrorsMessages([{message: "Blog not found", field: "id"}]));
-        return;
+        if (!blog) {
+            res
+                .status(HttpStatus.NotFound_404)
+                .send(createErrorsMessages([{message: "Blog not found", field: "id"}]));
+            return;
+        }
+
+        const newPost: Post = {
+            title: req.body.title,
+            shortDescription: req.body.shortDescription,
+            content: req.body.content,
+            blogId: req.body.blogId,
+            blogName: blog.name,
+        };
+
+        const createdPost = await postRepository.create(newPost);
+        const postViewModel = mapToPostViewModel(createdPost);
+
+        res.status(HttpStatus.Created_201).send(postViewModel);
+    } catch (e: unknown) {
+        res.sendStatus(HttpStatus.InternalServerError_500)
     }
-
-    const newPost: Post = {
-        id: db.posts.length ? (Number(db.posts[db.posts.length - 1].id) + 1).toString() : '1',
-        title: req.body.title,
-        shortDescription: req.body.shortDescription,
-        content: req.body.content,
-        blogId: req.body.blogId,
-        blogName: blog.name,
-    };
-
-    postRepository.create(newPost);
-
-    res.status(HttpStatus.Created_201).send(newPost);
 }
