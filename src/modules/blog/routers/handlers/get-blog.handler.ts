@@ -10,9 +10,9 @@ export async function getBlogHandler(req: Request, res: Response) {
         const blog = await blogRepository.findById(id);
 
         if (!blog) {
-            res
-                .status(HttpStatus.NotFound_404)
-                .send(createErrorsMessages([{message: "Blog not found", field: "id"}]));
+            // res
+            //     .status(HttpStatus.NotFound_404)
+            //     .send(createErrorsMessages([{message: "Blog not found", field: "id"}]));
             return;
         }
 

@@ -14,12 +14,12 @@ export async function updateBlogHandler(
         const dtoBlogName = req.body.name
         const blog = await blogRepository.findById(id);
 
-        if (!blog) {
-            res
-                .status(HttpStatus.NotFound_404)
-                .send(createErrorsMessages([{message: "Blog not found", field: "id"}]));
-            return;
-        }
+        // if (!blog) {
+        //     res
+        //         .status(HttpStatus.NotFound_404)
+        //         .send(createErrorsMessages([{message: "Blog not found", field: "id"}]));
+        //     return;
+        // }
 
         await postCollection.updateMany(
             {blogId: id, blogName: {$ne: dtoBlogName}},

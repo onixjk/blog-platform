@@ -15,9 +15,9 @@ export async function createPostHandler(
         const blog = await blogRepository.findById(req.body.blogId)
 
         if (!blog) {
-            res
-                .status(HttpStatus.NotFound_404)
-                .send(createErrorsMessages([{message: "Blog not found", field: "id"}]));
+            // res
+            //     .status(HttpStatus.NotFound_404)
+            //     .send(createErrorsMessages([{message: "Blog not found", field: "id"}]));
             return;
         }
 

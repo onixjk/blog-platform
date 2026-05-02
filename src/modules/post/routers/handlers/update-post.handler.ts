@@ -15,18 +15,18 @@ export async function updatePostHandler(
         const post = await postRepository.findById(id);
 
         if (!post) {
-            res
-                .status(HttpStatus.NotFound_404)
-                .send(createErrorsMessages([{message: "Post not found", field: "id"}]));
+            // res
+            //     .status(HttpStatus.NotFound_404)
+            //     .send(createErrorsMessages([{message: "Post not found", field: "id"}]));
             return;
         }
 
         const blog = await blogRepository.findById(req.body.blogId)
 
         if (!blog) {
-            res
-                .status(HttpStatus.NotFound_404)
-                .send(createErrorsMessages([{message: "Blog not found", field: "id"}]));
+            // res
+            //     .status(HttpStatus.NotFound_404)
+            //     .send(createErrorsMessages([{message: "Blog not found", field: "id"}]));
             return;
         }
 

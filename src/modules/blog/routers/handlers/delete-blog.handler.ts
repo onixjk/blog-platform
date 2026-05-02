@@ -9,12 +9,12 @@ export async function deleteBlogHandler(req: Request, res: Response) {
         const id = String(req.params.id);
         const blog = await blogRepository.findById(id);
 
-        if (!blog) {
-            res
-                .status(HttpStatus.NotFound_404)
-                .send(createErrorsMessages([{message: "Blog not found", field: "id"}]));
-            return;
-        }
+        // if (!blog) {
+        //     res
+        //         .status(HttpStatus.NotFound_404)
+        //         .send(createErrorsMessages([{message: "Blog not found", field: "id"}]));
+        //     return;
+        // }
 
         await postCollection.deleteMany({blogId: id});
         await blogRepository.delete(id);

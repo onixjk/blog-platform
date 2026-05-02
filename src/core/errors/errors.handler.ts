@@ -6,7 +6,7 @@ import { DomainError } from './domain.error';
 
 export function errorsHandler(error: unknown, res: Response): void {
     if (error instanceof RepositoryNotFoundError) {
-        const httpStatus = HttpStatus.NotFound;
+        const httpStatus = HttpStatus.NotFound_404;
 
         res.status(httpStatus).send(
             createErrorMessages([
@@ -21,7 +21,7 @@ export function errorsHandler(error: unknown, res: Response): void {
     }
 
     if (error instanceof DomainError) {
-        const httpStatus = HttpStatus.UnprocessableEntity;
+        const httpStatus = HttpStatus.UnprocessableEntity_422;
 
         res.status(httpStatus).send(
             createErrorMessages([
@@ -37,6 +37,6 @@ export function errorsHandler(error: unknown, res: Response): void {
         return;
     }
 
-    res.status(HttpStatus.InternalServerError);
+    res.status(HttpStatus.InternalServerError_500);
     return;
 }
