@@ -1,4 +1,4 @@
-import {Blog} from "../modules/blog/types/blog";
+import {Blog} from "../modules/blog/domain/blog";
 import {Post} from "../modules/post/types/post";
 
 export const db = {

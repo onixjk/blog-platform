@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import {blogRepository} from "../../repositories/blog.repository";
 import {HttpStatus} from "../../../../core/types/http-statuses";
 import {createErrorsMessages} from "../../../../core/utils/error.utils";
-import {mapToBlogViewModel} from "../mapers/map-to-blog-view-model.util";
+import {mapToBlogOutput} from "../mapers/map-to-blog-output.util";
 
 export async function getBlogHandler(req: Request, res: Response) {
     try {
@@ -16,7 +16,7 @@ export async function getBlogHandler(req: Request, res: Response) {
             return;
         }
 
-        const blogViewModel = mapToBlogViewModel(blog);
+        const blogViewModel = mapToBlogOutput(blog);
         res.status(HttpStatus.Ok_200).send(blogViewModel);
     } catch (e:unknown) {
         res.sendStatus(HttpStatus.InternalServerError_500)

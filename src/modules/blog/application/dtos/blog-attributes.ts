@@ -1,4 +1,4 @@
-export type BlogInputDto = {
+export type BlogAttributes = {
     name: string,
     description: string,
     websiteUrl: string

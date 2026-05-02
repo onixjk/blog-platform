@@ -2,11 +2,11 @@ import {Request, Response} from 'express';
 import {blogRepository} from "../../repositories/blog.repository";
 import {HttpStatus} from "../../../../core/types/http-statuses";
 import {createErrorsMessages} from "../../../../core/utils/error.utils";
-import {BlogInputDto} from "../../dto/blog.input-dto";
+import {BlogAttributes} from "../../application/dtos/blog-attributes";
 import {postCollection} from "../../../../db/mongo.db";
 
 export async function updateBlogHandler(
-    req: Request<{ id: string }, {}, BlogInputDto>,
+    req: Request<{ id: string }, {}, BlogAttributes>,
     res: Response
 ) {
     try {

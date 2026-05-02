@@ -1,12 +1,12 @@
 import {Request, Response} from 'express';
 import {blogRepository} from "../../repositories/blog.repository";
 import {HttpStatus} from "../../../../core/types/http-statuses";
-import {Blog} from "../../types/blog";
-import {BlogInputDto} from "../../dto/blog.input-dto";
-import {mapToBlogViewModel} from "../mapers/map-to-blog-view-model.util";
+import {Blog} from "../../domain/blog";
+import {BlogAttributes} from "../../application/dtos/blog-attributes";
+import {mapToBlogOutput} from "../mapers/map-to-blog-output.util";
 
 export async function createBlogHandler(
-    req: Request<{}, {}, BlogInputDto>,
+    req: Request<{}, {}, BlogAttributes>,
     res: Response
 ) {
     try {
@@ -19,7 +19,7 @@ export async function createBlogHandler(
         };
 
         const createdBlog = await blogRepository.create(newBlog);
-        const blogViewModel = mapToBlogViewModel(createdBlog);
+        const blogViewModel = mapToBlogOutput(createdBlog);
 
         res.status(HttpStatus.Created_201).send(blogViewModel);
     } catch (e: unknown) {

@@ -1,10 +1,10 @@
-import {BlogInputDto} from "../dto/blog.input-dto";
-import {Blog} from "../types/blog";
+import {BlogAttributes} from "../application/dtos/blog-attributes";
+import {Blog} from "../domain/blog";
 import {blogCollection} from "../../../db/mongo.db";
 import {ObjectId, WithId} from "mongodb";
 
 export const blogRepository = {
-    async findAll(): Promise<WithId<Blog>[]> {
+    async findMany(): Promise<WithId<Blog>[]> {
         return blogCollection.find().toArray();
     },
 
@@ -17,7 +17,7 @@ export const blogRepository = {
         return {...newBlog, _id: insertResult.insertedId};
     },
 
-    async update(id: string, dto: BlogInputDto): Promise<void> {
+    async update(id: string, dto: BlogAttributes): Promise<void> {
         const updateResult = await blogCollection.updateOne(
             {
                 _id: new ObjectId(id),
