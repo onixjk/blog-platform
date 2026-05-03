@@ -3,7 +3,6 @@ import {BlogSortField} from "./blog-sort-field";
 
 export type BlorQueryInput = PaginationAndSorting<BlogSortField> &
     Partial<{
-        searchDriverNameTerm: string;
-        searchDriverEmailTerm: string;
-        searchVehicleMakeTerm: string;
+        searchBlogNameTerm: string;
+        searchBlogWebsiteUrlTerm: string;
     }>;
