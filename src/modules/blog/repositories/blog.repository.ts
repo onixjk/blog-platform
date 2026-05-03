@@ -3,6 +3,7 @@ import {Blog} from "../domain/blog";
 import {blogCollection} from "../../../db/mongo.db";
 import {ObjectId, WithId} from "mongodb";
 import {BlorQueryInput} from "../routers/input/blog-query.input";
+import {RepositoryNotFoundError} from "../../../core/errors/repository-not-found.error";
 
 export const blogRepository = {
     async findMany(queryDto: BlorQueryInput): Promise<{ items: WithId<Blog>[], totalCount: number }> {
@@ -41,6 +42,16 @@ export const blogRepository = {
     async findById(id: string): Promise<WithId<Blog> | null> {
         return blogCollection.findOne({_id: new ObjectId(id)});
     },
+
+    async findByIdOrFail(id: string): Promise<WithId<Blog> | null> {
+        const res = blogCollection.findOne({_id: new ObjectId(id)});
+
+        if (!res) {
+            throw new RepositoryNotFoundError('Blog not exist');
+        }
+
+        return res;
+    }
 
     async create(newBlog: Blog): Promise<WithId<Blog>> {
         const insertResult = await blogCollection.insertOne(newBlog)
