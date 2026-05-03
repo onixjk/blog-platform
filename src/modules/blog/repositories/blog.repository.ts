@@ -6,7 +6,9 @@ import {BlorQueryInput} from "../routers/input/blog-query.input";
 import {RepositoryNotFoundError} from "../../../core/errors/repository-not-found.error";
 
 export const blogRepository = {
-    async findMany(queryDto: BlorQueryInput): Promise<{ items: WithId<Blog>[], totalCount: number }> {
+    async findMany(
+        queryDto: BlorQueryInput
+    ): Promise<{ items: WithId<Blog>[], totalCount: number }> {
         const {
             pageNumber,
             pageSize,
@@ -51,11 +53,12 @@ export const blogRepository = {
         }
 
         return res;
-    }
+    },
 
-    async create(newBlog: Blog): Promise<WithId<Blog>> {
+    async create(newBlog: Blog): Promise<string> {
         const insertResult = await blogCollection.insertOne(newBlog)
-        return {...newBlog, _id: insertResult.insertedId};
+
+        return insertResult.insertedId.toString();
     },
 
     async update(id: string, dto: BlogAttributes): Promise<void> {
@@ -73,8 +76,9 @@ export const blogRepository = {
         );
 
         if (updateResult.matchedCount < 1) {
-            throw new Error("Blog doesn't exist");
+            throw new RepositoryNotFoundError('Blog not exist');
         }
+
         return;
     },
 
@@ -82,7 +86,7 @@ export const blogRepository = {
         const deleteResult = await blogCollection.deleteOne({_id: new ObjectId(id)});
 
         if (deleteResult.deletedCount < 1) {
-            throw new Error("Blog doesn't exist");
+            throw new RepositoryNotFoundError('Blog not exist');
         }
         return;
     }
