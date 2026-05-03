@@ -33,7 +33,7 @@ export const blogService = {
     },
 
     async update(id: string, dto: BlogAttributes): Promise<void> {
-        await postRepository.updateByBlogId(id, dto.name)
+        await postRepository.updateBlogName(id, dto.name)
         await blogRepository.update(id, dto);
 
         return;
