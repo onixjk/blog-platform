@@ -23,23 +23,23 @@ export const postRepository = {
         const filter: any = {};
 
         if (searchPostTitleTerm) {
-            filter.name = { $regex: searchPostTitleTerm, $options: 'i' };
+            filter.name = {$regex: searchPostTitleTerm, $options: 'i'};
         }
 
         if (searchPostNameTerm) {
-            filter.websiteUrl = { $regex: searchPostNameTerm, $options: 'i' };
+            filter.websiteUrl = {$regex: searchPostNameTerm, $options: 'i'};
         }
 
         const items = await postCollection
             .find(filter)
-            .sort({ [sortBy]: sortDirection })
+            .sort({[sortBy]: sortDirection})
             .skip(skip)
             .limit(pageSize)
             .toArray();
 
         const totalCount = await postCollection.countDocuments(filter);
 
-        return { items, totalCount };
+        return {items, totalCount};
     },
 
     async findById(id: string): Promise<WithId<Post> | null> {
@@ -84,12 +84,42 @@ export const postRepository = {
         return;
     },
 
+    async updateByBlogId(blogId: string, blogName: string): Promise<void> {
+        const updateResult = await postCollection.updateOne(
+            {
+                blogId: blogId
+            },
+            {
+                $set: {
+                    blogName: blogName,
+                }
+            }
+        );
+
+        if (updateResult.matchedCount < 1) {
+            throw new Error("Post doesn't exist");
+        }
+
+        return;
+    },
+
     async delete(id: string): Promise<void> {
         const deleteResult = await postCollection.deleteOne({_id: new ObjectId(id)});
 
         if (deleteResult.deletedCount < 1) {
             throw new Error("Post not exist");
         }
+
+        return;
+    },
+
+    async deleteByBlogId(blogId: string): Promise<void> {
+        const deleteResult = await postCollection.deleteMany({blogId: blogId});
+
+        if (deleteResult.deletedCount < 1) {
+            throw new Error("Post not exist");
+        }
+
         return;
     }
 }

@@ -88,7 +88,6 @@ export const blogRepository = {
         if (deleteResult.deletedCount < 1) {
             throw new RepositoryNotFoundError('Blog not exist');
         }
-
         return;
     }
 }
