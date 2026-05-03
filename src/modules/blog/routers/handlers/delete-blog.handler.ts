@@ -1,7 +1,6 @@
 import {Request, Response} from 'express';
 import {blogRepository} from "../../repositories/blog.repository";
 import {HttpStatus} from "../../../../core/types/http-statuses";
-import {createErrorsMessages} from "../../../../core/utils/error.utils";
 import {postCollection} from "../../../../db/mongo.db";
 
 export async function deleteBlogHandler(req: Request, res: Response) {

@@ -1,14 +1,13 @@
 import {Request, Response} from "express";
 import {HttpStatus} from "../../../../core/types/http-statuses";
-import {PostInputDto} from "../../dto/post.input-dto";
-import {Post} from "../../types/post";
+import {PostAttributes} from "../../application/dtos/post.attributes";
+import {Post} from "../../domain/post";
 import {postRepository} from "../../repositories/post.repository";
 import {blogRepository} from "../../../blog/repositories/blog.repository";
-import {createErrorsMessages} from "../../../../core/utils/error.utils";
 import {mapToPostViewModel} from "../mapers/map-to-post-view-model.util";
 
 export async function createPostHandler(
-    req: Request<{}, {}, PostInputDto>,
+    req: Request<{}, {}, PostAttributes>,
     res: Response
 ) {
     try {

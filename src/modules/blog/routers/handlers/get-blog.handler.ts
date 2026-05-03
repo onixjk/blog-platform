@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import {blogRepository} from "../../repositories/blog.repository";
 import {HttpStatus} from "../../../../core/types/http-statuses";
-import {createErrorsMessages} from "../../../../core/utils/error.utils";
 import {mapToBlogOutput} from "../mapers/map-to-blog-output.util";
 
 export async function getBlogHandler(req: Request, res: Response) {

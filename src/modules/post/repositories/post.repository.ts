@@ -1,5 +1,5 @@
-import {Post} from "../types/post";
-import {PostInputDto} from "../dto/post.input-dto";
+import {Post} from "../domain/post";
+import {PostAttributes} from "../application/dtos/post.attributes";
 import {ObjectId, WithId} from "mongodb";
 import {postCollection} from "../../../db/mongo.db";
 
@@ -17,7 +17,7 @@ export const postRepository = {
         return {...newPost, _id: insertResult.insertedId};
     },
 
-    async update(id: string, dto: PostInputDto, blogName: string): Promise<void> {
+    async update(id: string, dto: PostAttributes, blogName: string): Promise<void> {
         const updateResult = await postCollection.updateOne(
             {
                 _id: new ObjectId(id)

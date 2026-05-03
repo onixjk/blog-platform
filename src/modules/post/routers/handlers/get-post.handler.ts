@@ -1,6 +1,5 @@
 import {Request, Response} from 'express';
 import {HttpStatus} from "../../../../core/types/http-statuses";
-import {createErrorsMessages} from "../../../../core/utils/error.utils";
 import {postRepository} from "../../repositories/post.repository";
 import {mapToPostViewModel} from "../mapers/map-to-post-view-model.util";
 

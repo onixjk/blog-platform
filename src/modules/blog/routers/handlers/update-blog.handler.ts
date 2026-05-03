@@ -1,7 +1,6 @@
 import {Request, Response} from 'express';
 import {blogRepository} from "../../repositories/blog.repository";
 import {HttpStatus} from "../../../../core/types/http-statuses";
-import {createErrorsMessages} from "../../../../core/utils/error.utils";
 import {BlogAttributes} from "../../application/dtos/blog-attributes";
 import {postCollection} from "../../../../db/mongo.db";
 

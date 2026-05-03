@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import {superAdminGuardMiddleware} from "../../../auth/middlewares/super-admin.guard-middleware";
-import {postInputDtoValidation} from "../validation/post.input-dto.validation-middlewares";
+import {postInputDtoValidation} from "./post.input-dto.validation-middlewares";
 import {getPostListHandler} from "./handlers/get-post-list.handler";
 import {getPostHandler} from "./handlers/get-post.handler";
 import {createPostHandler} from "./handlers/create-post.handler";

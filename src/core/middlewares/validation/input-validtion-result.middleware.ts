@@ -27,8 +27,6 @@ const formatValidationError = (error: ValidationError): ValidationErrorType => {
     };
 };
 
-
-
 export const inputValidationResultMiddleware = (
     req: Request<{}, {}, {}, {}>,
     res: Response,

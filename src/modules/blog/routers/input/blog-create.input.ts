@@ -1,7 +1,7 @@
 import {ResourceType} from "../../../../core/types/resource-type";
 import { BlogAttributes } from '../../application/dtos/blog-attributes';
 
-export type DriverCreateInput = {
+export type BlogCreateInput = {
     data: {
         type: ResourceType.Blogs;
         attributes: BlogAttributes;

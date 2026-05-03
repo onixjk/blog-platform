@@ -1,32 +1,32 @@
-// import { WithId } from 'mongodb';
-// import { Driver } from '../../domain/driver';
-// import { ResourceType } from '../../../core/types/resource-type';
-// import { DriverListPaginatedOutput } from '../output/driver-list-paginated.output';
-// import { DriverDataOutput } from '../output/driver-data.output';
-//
-// export function mapToDriverListPaginatedOutput(
-//     drivers: WithId<Driver>[],
-//     meta: { pageNumber: number; pageSize: number; totalCount: number },
-// ): DriverListPaginatedOutput {
-//     return {
-//         meta: {
-//             page: meta.pageNumber,
-//             pageSize: meta.pageSize,
-//             pageCount: Math.ceil(meta.totalCount / meta.pageSize),
-//             totalCount: meta.totalCount,
-//         },
-//         data: drivers.map(
-//             (driver): DriverDataOutput => ({
-//                 type: ResourceType.Drivers,
-//                 id: driver._id.toString(),
-//                 attributes: {
-//                     name: driver.name,
-//                     phoneNumber: driver.phoneNumber,
-//                     email: driver.email,
-//                     vehicle: driver.vehicle,
-//                     createdAt: driver.createdAt,
-//                 },
-//             }),
-//         ),
-//     };
-// }
+import { WithId } from 'mongodb';
+import { Blog } from '../../domain/blog';
+import { ResourceType } from '../../../../core/types/resource-type';
+import { BlogListPaginatedOutput } from '../output/blog-list-paginated.output';
+import { BlogDataOutput } from '../output/blog-data.output';
+
+export function mapToDriverListPaginatedOutput(
+    blogs: WithId<Blog>[],
+    meta: { pageNumber: number; pageSize: number; totalCount: number },
+): BlogListPaginatedOutput {
+    return {
+        meta: {
+            page: meta.pageNumber,
+            pageSize: meta.pageSize,
+            pageCount: Math.ceil(meta.totalCount / meta.pageSize),
+            totalCount: meta.totalCount,
+        },
+        data: blogs.map(
+            (blog): BlogDataOutput => ({
+                type: ResourceType.Blogs,
+                id: blog._id.toString(),
+                attributes: {
+                    name: blog.name,
+                    description: blog.description,
+                    websiteUrl: blog.websiteUrl,
+                    createdAt: blog.createdAt,
+                    isMembership: blog.isMembership,
+                },
+            }),
+        ),
+    };
+}

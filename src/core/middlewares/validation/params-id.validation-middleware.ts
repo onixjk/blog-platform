@@ -1,9 +1,19 @@
-import { param } from 'express-validator';
+import { body, param } from 'express-validator';
 
 export const idValidation = param('id')
     .exists()
-    .withMessage('ID is required') // Проверка на наличие
+    .withMessage('ID is required')
     .isString()
-    .withMessage('ID must be a string') // Проверка, что это строка
+    .withMessage('ID must be a string')
     .isMongoId()
-    .withMessage('Incorrect format of ObjectId')
+    .withMessage('Неверный формат ObjectId');
+
+export const dataIdMatchValidation = body('data.id')
+    .exists()
+    .withMessage('ID in body is required')
+    .custom((value, { req }) => {
+        if (value !== req?.params?.id) {
+            throw new Error('ID in URL and body must match');
+        }
+        return true;
+    });
