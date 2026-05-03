@@ -24,7 +24,7 @@ export const superAdminGuardMiddleware = (
         return;
     }
 
-    const credentials = Buffer.from(token, 'base64').toString('utf-8'); //dbcadkcnasdk
+    const credentials = Buffer.from(token, 'base64').toString('utf-8');
 
     const [username, password] = credentials.split(':'); //admin:qwerty
 
