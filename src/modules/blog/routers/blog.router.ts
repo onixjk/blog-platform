@@ -35,9 +35,9 @@ blogRouter
     )
 
     .get('/:blogId/posts',
-        idValidation,
+        // idValidation,
         // paginationAndSortingValidation(BlogSortField),
-        inputValidationResultMiddleware,
+        // inputValidationResultMiddleware,
         getBlogPostListHandler,
     )
 
