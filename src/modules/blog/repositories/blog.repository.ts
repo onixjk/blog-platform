@@ -2,12 +2,12 @@ import {BlogAttributes} from "../application/dtos/blog-attributes";
 import {Blog} from "../domain/blog";
 import {blogCollection} from "../../../db/mongo.db";
 import {ObjectId, WithId} from "mongodb";
-import {BlorQueryInput} from "../routers/input/blog-query.input";
+import {BlogQueryInput} from "../routers/input/blog-query.input";
 import {RepositoryNotFoundError} from "../../../core/errors/repository-not-found.error";
 
 export const blogRepository = {
     async findMany(
-        queryDto: BlorQueryInput
+        queryDto: BlogQueryInput
     ): Promise<{ items: WithId<Blog>[], totalCount: number }> {
         const {
             pageNumber,
