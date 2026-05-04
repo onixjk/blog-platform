@@ -5,11 +5,11 @@ import {PostQueryInput} from "../../../post/routers/input/post-query.input";
 import {mapToPostListPaginatedOutput} from "../../../post/routers/mapers/map-to-post-list-paginated-output.util";
 
 export async function getBlogPostListHandler(
-    req: Request<{ id: string }, {}, {}, PostQueryInput>,
+    req: Request<{ blogId: string }, {}, {}, PostQueryInput>,
     res: Response
 ) {
     try {
-        const blogId = req.params.id;
+        const blogId = req.params.blogId;
         const queryInput = req.query;
 
         const {items, totalCount} = await postsService.findPostsByBlog(
