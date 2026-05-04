@@ -105,7 +105,7 @@ export const postsRepository = {
     },
 
     async updateBlogName(blogId: string, blogName: string): Promise<void> {
-        const updateResult = await postCollection.updateOne(
+        const updateResult = await postCollection.updateMany(
             {
                 blogId: blogId
             },
