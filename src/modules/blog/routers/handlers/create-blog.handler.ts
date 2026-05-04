@@ -12,7 +12,7 @@ export async function createBlogHandler(
     try {
         const createdBlogId = await blogsService.create(
             req.body.data.attributes,
-            );
+        );
 
         const createdBlog = await blogsService.findByIdOrFail(createdBlogId);
         const blogOutput = mapToBlogOutput(createdBlog);

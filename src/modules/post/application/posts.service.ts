@@ -4,8 +4,9 @@ import {PostQueryInput} from "../routers/input/post-query.input";
 import {postsRepository} from "../repositories/posts.repository";
 import {PostAttributes} from "./dtos/post.attributes";
 import {blogsRepository} from "../../blog/repositories/blogs.repository";
+import {blogsService} from "../../blog/application/blogs.service";
 
-export const postService = {
+export const postsService = {
     async findMany(
         queryDto: PostQueryInput
     ): Promise<{ items: WithId<Post>[], totalCount: number }> {
@@ -21,17 +22,19 @@ export const postService = {
         return postsRepository.findPostsByBlog(queryDto, blogId);
     },
 
-    async findByIdOrFail(id: string): Promise<WithId<Post> | null> {
+    async findByIdOrFail(id: string): Promise<WithId<Post>> {
         return postsRepository.findByIdOrFail(id);
     },
 
-    async create(dto: PostAttributes, blogName: string): Promise<string> {
+    async create(dto: PostAttributes): Promise<string> {
+        const blog = await blogsService.findByIdOrFail(dto.blogId);
+
         const newPost: Post = {
             title: dto.title,
             shortDescription: dto.shortDescription,
             content: dto.content,
             blogId: dto.blogId,
-            blogName: blogName,
+            blogName: blog.name,
             createdAt: new Date().toISOString(),
         }
 

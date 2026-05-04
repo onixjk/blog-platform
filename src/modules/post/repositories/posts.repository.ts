@@ -66,8 +66,8 @@ export const postsRepository = {
         return postCollection.findOne({_id: new ObjectId(id)});
     },
 
-    async findByIdOrFail(id: string): Promise<WithId<Post> | null> {
-        const res = postCollection.findOne({_id: new ObjectId(id)});
+    async findByIdOrFail(id: string): Promise<WithId<Post>> {
+        const res = await postCollection.findOne({_id: new ObjectId(id)});
 
         if (!res) {
             throw new RepositoryNotFoundError('Post not exist');

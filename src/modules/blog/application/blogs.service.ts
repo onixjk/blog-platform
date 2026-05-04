@@ -3,7 +3,7 @@ import {Blog} from "../domain/blog";
 import {WithId} from "mongodb";
 import {blogsRepository} from "../repositories/blogs.repository";
 import {BlogAttributes} from "./dtos/blog-attributes";
-import {postService} from "../../post/application/posts.service";
+import {postsService} from "../../post/application/posts.service";
 
 
 export const blogsService = {
@@ -30,14 +30,14 @@ export const blogsService = {
     },
 
     async update(id: string, dto: BlogAttributes): Promise<void> {
-        await postService.updateBlogName(id, dto.name);
+        await postsService.updateBlogName(id, dto.name);
         await blogsRepository.update(id, dto);
 
         return;
     },
 
     async delete(id: string): Promise<void> {
-        await postService.deleteAllByBlogId(id)
+        await postsService.deleteAllByBlogId(id)
         await blogsRepository.delete(id);
 
         return;

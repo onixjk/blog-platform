@@ -1,6 +1,6 @@
 import {Request, Response} from 'express';
 import {errorsHandler} from "../../../../core/errors/errors.handler";
-import {postService} from "../../../post/application/posts.service";
+import {postsService} from "../../../post/application/posts.service";
 import {PostQueryInput} from "../../../post/routers/input/post-query.input";
 import {mapToPostListPaginatedOutput} from "../../../post/routers/mapers/map-to-post-list-paginated-output.util";
 
@@ -12,7 +12,7 @@ export async function getBlogListHandler(
         const blogId = req.params.id;
         const queryInput = req.query;
 
-        const {items, totalCount} = await postService.findPostsByBlog(
+        const {items, totalCount} = await postsService.findPostsByBlog(
             queryInput,
             blogId,
         );

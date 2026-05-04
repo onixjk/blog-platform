@@ -1,39 +1,24 @@
 import {Request, Response} from "express";
+import {errorsHandler} from "../../../../core/errors/errors.handler";
+import {postsService} from "../../application/posts.service";
+import {PostCreateInput} from "../input/post-create.input";
+import {mapToPostOutput} from "../mapers/map-to-post-output.util";
 import {HttpStatus} from "../../../../core/types/http-statuses";
-import {PostAttributes} from "../../application/dtos/post.attributes";
-import {Post} from "../../domain/post";
-import {postsRepository} from "../../repositories/posts.repository";
-import {blogsRepository} from "../../../blog/repositories/blogs.repository";
-import {mapToPostViewModel} from "../mapers/map-to-post-view-model.util";
 
 export async function createPostHandler(
-    req: Request<{}, {}, PostAttributes>,
+    req: Request<{}, {}, PostCreateInput>,
     res: Response
 ) {
     try {
-        const blog = await blogsRepository.findById(req.body.blogId)
+        const createdPostId = await postsService.create(
+            req.body.data.attributes,
+        );
 
-        if (!blog) {
-            // res
-            //     .status(HttpStatus.NotFound_404)
-            //     .send(createErrorsMessages([{message: "Blog not found", field: "id"}]));
-            return;
-        }
+        const createdPost = await postsService.findByIdOrFail(createdPostId);
+        const postOutput = mapToPostOutput(createdPost);
 
-        const newPost: Post = {
-            title: req.body.title,
-            shortDescription: req.body.shortDescription,
-            content: req.body.content,
-            blogId: req.body.blogId,
-            blogName: blog.name,
-            createdAt: new Date().toISOString(),
-        };
-
-        const createdPost = await postsRepository.create(newPost);
-        const postViewModel = mapToPostViewModel(createdPost);
-
-        res.status(HttpStatus.Created_201).send(postViewModel);
+        res.status(HttpStatus.Created_201).send(postOutput);
     } catch (e: unknown) {
-        res.sendStatus(HttpStatus.InternalServerError_500)
+        errorsHandler(e, res);
     }
 }
