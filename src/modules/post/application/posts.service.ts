@@ -41,8 +41,10 @@ export const postsService = {
         return postsRepository.create(newPost);
     },
 
-    async update(id: string, dto: PostAttributes, blogName: string): Promise<void> {
-        await postsRepository.update(id, dto, blogName);
+    async update(id: string, dto: PostAttributes): Promise<void> {
+        const blog = await blogsService.findByIdOrFail(dto.blogId);
+
+        await postsRepository.update(id, dto, blog.name);
         return;
     },
 
