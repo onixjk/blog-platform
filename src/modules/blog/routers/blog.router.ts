@@ -36,20 +36,20 @@ blogRouter
     .get('/:blogId/posts',
         idValidation,
         // paginationAndSortingValidation(BlogSortField),
-        // inputValidationResultMiddleware,
+        inputValidationResultMiddleware,
         getBlogPostListHandler,
     )
 
     .post('',
         superAdminGuardMiddleware,
         // blogCreateInputValidation,
-        // inputValidationResultMiddleware,
+        inputValidationResultMiddleware,
         createBlogHandler,
     )
 
     .post('/:blogId/posts',
         superAdminGuardMiddleware,
-        postCreateInputValidation,
+        // postCreateInputValidation,
         inputValidationResultMiddleware,
         createBlogHandler,
     )
