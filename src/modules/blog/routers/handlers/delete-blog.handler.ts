@@ -1,25 +1,19 @@
 import {Request, Response} from 'express';
-import {blogRepository} from "../../repositories/blog.repository";
 import {HttpStatus} from "../../../../core/types/http-statuses";
-import {postCollection} from "../../../../db/mongo.db";
+import {errorsHandler} from "../../../../core/errors/errors.handler";
+import {blogsService} from "../../application/blogs.service";
 
-export async function deleteBlogHandler(req: Request, res: Response) {
+export async function deleteBlogHandler(
+    req: Request<{ id: string }>,
+    res: Response
+) {
     try {
-        const id = String(req.params.id);
-        const blog = await blogRepository.findById(id);
+        const id = req.params.id;
 
-        // if (!blog) {
-        //     res
-        //         .status(HttpStatus.NotFound_404)
-        //         .send(createErrorsMessages([{message: "Blog not found", field: "id"}]));
-        //     return;
-        // }
-
-        await postCollection.deleteMany({blogId: id});
-        await blogRepository.delete(id);
+        await blogsService.delete(id);
 
         res.sendStatus(HttpStatus.NoContent_204);
-    } catch (e:unknown) {
-        res.sendStatus(HttpStatus.InternalServerError_500)
+    } catch (e: unknown) {
+        errorsHandler(e, res);
     }
 }

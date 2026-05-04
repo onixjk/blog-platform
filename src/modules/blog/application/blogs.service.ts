@@ -6,7 +6,7 @@ import {BlogAttributes} from "./dtos/blog-attributes";
 import {postService} from "../../post/application/posts.service";
 
 
-export const blogService = {
+export const blogsService = {
     async findMany(
         queryDto: BlogQueryInput,
     ): Promise<{ items: WithId<Blog>[]; totalCount: number }> {
