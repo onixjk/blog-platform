@@ -49,7 +49,7 @@ export const postsService = {
     },
 
     async updateBlogName(blogId: string, blogName: string): Promise<void> {
-        await postsRepository.updateBlogName(blogId, blogName);
+        await postsRepository.updateAllBlogNames(blogId, blogName);
 
         return;
     },
