@@ -1,9 +1,8 @@
 import {Post} from "../domain/post";
 import {PostAttributes} from "../application/dtos/post.attributes";
 import {ObjectId, WithId} from "mongodb";
-import {blogCollection, postCollection} from "../../../db/mongo.db";
+import {postCollection} from "../../../db/mongo.db";
 import {PostQueryInput} from "../routers/input/post-query.input";
-import {Blog} from "../../blog/domain/blog";
 import {RepositoryNotFoundError} from "../../../core/errors/repository-not-found.error";
 
 export const postRepository = {

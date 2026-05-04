@@ -1,11 +1,8 @@
 import {BlogQueryInput} from "../routers/input/blog-query.input";
 import {Blog} from "../domain/blog";
-import {ObjectId, WithId} from "mongodb";
+import {WithId} from "mongodb";
 import {blogRepository} from "../repositories/blog.repository";
-import {blogCollection} from "../../../db/mongo.db";
 import {BlogAttributes} from "./dtos/blog-attributes";
-import {RepositoryNotFoundError} from "../../../core/errors/repository-not-found.error";
-import {postRepository} from "../../post/repositories/post.repository";
 import {postService} from "../../post/application/posts.service";
 
 

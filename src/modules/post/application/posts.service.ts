@@ -1,9 +1,7 @@
-import {ObjectId, WithId} from "mongodb";
+import {WithId} from "mongodb";
 import {Post} from "../domain/post";
-import {postCollection} from "../../../db/mongo.db";
 import {PostQueryInput} from "../routers/input/post-query.input";
 import {postRepository} from "../repositories/post.repository";
-import {RepositoryNotFoundError} from "../../../core/errors/repository-not-found.error";
 import {PostAttributes} from "./dtos/post.attributes";
 
 export const postService = {
