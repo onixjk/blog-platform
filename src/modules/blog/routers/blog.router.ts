@@ -58,7 +58,7 @@ blogRouter
     .put('/:id',
         superAdminGuardMiddleware,
         idValidation,
-        blogUpdateInputValidation,
+        // blogUpdateInputValidation,
         inputValidationResultMiddleware,
         updateBlogHandler,
     )
