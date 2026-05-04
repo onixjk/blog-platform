@@ -30,7 +30,7 @@ postRouter
 
     .post('',
         superAdminGuardMiddleware,
-        postCreateInputValidation,
+        // postCreateInputValidation,
         inputValidationResultMiddleware,
         createPostHandler,
     )
