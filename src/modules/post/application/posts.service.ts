@@ -44,8 +44,8 @@ export const postService = {
         return;
     },
 
-    async deleteByBlogId(blogId: string): Promise<void> {
-        await postRepository.deleteByBlogId(blogId);
+    async deleteAllByBlogId(blogId: string): Promise<void> {
+        await postRepository.deleteAllByBlogId(blogId);
         return;
     }
 

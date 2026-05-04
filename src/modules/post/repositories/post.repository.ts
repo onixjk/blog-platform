@@ -112,7 +112,7 @@ export const postRepository = {
         return;
     },
 
-    async deleteByBlogId(blogId: string): Promise<void> {
+    async deleteAllByBlogId(blogId: string): Promise<void> {
         const deleteResult = await postCollection.deleteMany({blogId: blogId});
 
         if (deleteResult.deletedCount < 1) {

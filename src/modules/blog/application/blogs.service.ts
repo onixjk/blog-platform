@@ -13,8 +13,7 @@ export const blogService = {
         return blogRepository.findMany(queryDto);
     },
 
-    //todo null???
-    async findByIdOrFail(id: string): Promise<WithId<Blog> | null> {
+    async findByIdOrFail(id: string): Promise<WithId<Blog>> {
         return blogRepository.findByIdOrFail(id);
     },
 
@@ -38,7 +37,7 @@ export const blogService = {
     },
 
     async delete(id: string): Promise<void> {
-        await postService.deleteByBlogId(id)
+        await postService.deleteAllByBlogId(id)
         await blogRepository.delete(id);
 
         return;
