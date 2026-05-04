@@ -1,8 +1,8 @@
 import {Request, Response} from "express";
 import {errorsHandler} from "../../../../core/errors/errors.handler";
-import {postsService} from "../../application/posts.service";
-import {PostCreateInput} from "../input/post-create.input";
-import {mapToPostOutput} from "../mapers/map-to-post-output.util";
+import {postsService} from "../../../post/application/posts.service";
+import {PostCreateInput} from "../../../post/routers/input/post-create.input";
+import {mapToPostOutput} from "../../../post/routers/mapers/map-to-post-output.util";
 import {HttpStatus} from "../../../../core/types/http-statuses";
 
 export async function createBlogPostHandler(
