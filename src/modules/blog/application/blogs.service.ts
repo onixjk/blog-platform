@@ -1,7 +1,7 @@
 import {BlogQueryInput} from "../routers/input/blog-query.input";
 import {Blog} from "../domain/blog";
 import {WithId} from "mongodb";
-import {blogRepository} from "../repositories/blog.repository";
+import {blogsRepository} from "../repositories/blogs.repository";
 import {BlogAttributes} from "./dtos/blog-attributes";
 import {postService} from "../../post/application/posts.service";
 
@@ -10,11 +10,11 @@ export const blogsService = {
     async findMany(
         queryDto: BlogQueryInput,
     ): Promise<{ items: WithId<Blog>[]; totalCount: number }> {
-        return blogRepository.findMany(queryDto);
+        return blogsRepository.findMany(queryDto);
     },
 
     async findByIdOrFail(id: string): Promise<WithId<Blog>> {
-        return blogRepository.findByIdOrFail(id);
+        return blogsRepository.findByIdOrFail(id);
     },
 
     async create(dto: BlogAttributes): Promise<string> {
@@ -26,19 +26,19 @@ export const blogsService = {
             isMembership: false,
         }
 
-        return blogRepository.create(newBlog);
+        return blogsRepository.create(newBlog);
     },
 
     async update(id: string, dto: BlogAttributes): Promise<void> {
         await postService.updateBlogName(id, dto.name);
-        await blogRepository.update(id, dto);
+        await blogsRepository.update(id, dto);
 
         return;
     },
 
     async delete(id: string): Promise<void> {
         await postService.deleteAllByBlogId(id)
-        await blogRepository.delete(id);
+        await blogsRepository.delete(id);
 
         return;
     }

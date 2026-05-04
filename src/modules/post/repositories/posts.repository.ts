@@ -5,7 +5,7 @@ import {postCollection} from "../../../db/mongo.db";
 import {PostQueryInput} from "../routers/input/post-query.input";
 import {RepositoryNotFoundError} from "../../../core/errors/repository-not-found.error";
 
-export const postRepository = {
+export const postsRepository = {
     async findMany(
         queryDto: PostQueryInput
     ): Promise<{ items: WithId<Post>[], totalCount: number }> {
@@ -37,6 +37,27 @@ export const postRepository = {
             .toArray();
 
         const totalCount = await postCollection.countDocuments(filter);
+
+        return {items, totalCount};
+    },
+
+    async findPostsByBlog(
+        queryDto: PostQueryInput,
+        blogId: string,
+    ): Promise<{ items: WithId<Post>[], totalCount: number }> {
+        const {pageNumber, pageSize, sortBy, sortDirection} = queryDto;
+        const filter = {'blog.id': blogId};
+        const skip = (pageNumber - 1) * pageSize;
+
+        const [items, totalCount] = await Promise.all([
+            postCollection
+                .find(filter)
+                .sort({[sortBy]: sortDirection})
+                .skip(skip)
+                .limit(pageSize)
+                .toArray(),
+            postCollection.countDocuments(filter),
+        ]);
 
         return {items, totalCount};
     },

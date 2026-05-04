@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {blogRepository} from "../../repositories/blog.repository";
+import {blogsRepository} from "../../repositories/blogs.repository";
 import {HttpStatus} from "../../../../core/types/http-statuses";
 import {BlogAttributes} from "../../application/dtos/blog-attributes";
 import {postCollection} from "../../../../db/mongo.db";
@@ -11,7 +11,7 @@ export async function updateBlogHandler(
     try {
         const id = req.params.id;
         const dtoBlogName = req.body.name
-        const blog = await blogRepository.findById(id);
+        const blog = await blogsRepository.findById(id);
 
         // if (!blog) {
         //     res
@@ -25,7 +25,7 @@ export async function updateBlogHandler(
             {$set: {blogName: dtoBlogName}}
         );
 
-        await blogRepository.update(id, req.body);
+        await blogsRepository.update(id, req.body);
         res.sendStatus(HttpStatus.NoContent_204);
     } catch (e: unknown) {
         res.sendStatus(HttpStatus.InternalServerError_500)

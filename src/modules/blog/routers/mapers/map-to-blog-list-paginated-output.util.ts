@@ -4,7 +4,7 @@ import { ResourceType } from '../../../../core/types/resource-type';
 import { BlogListPaginatedOutput } from '../output/blog-list-paginated.output';
 import { BlogDataOutput } from '../output/blog-data.output';
 
-export function mapToDriverListPaginatedOutput(
+export function mapToBlogListPaginatedOutput(
     blogs: WithId<Blog>[],
     meta: { pageNumber: number; pageSize: number; totalCount: number },
 ): BlogListPaginatedOutput {

@@ -1,16 +1,30 @@
 import {Request, Response} from 'express';
-import {PostQueryInput} from "../../../post/routers/input/post-query.input";
 import {errorsHandler} from "../../../../core/errors/errors.handler";
+import {postService} from "../../../post/application/posts.service";
+import {PostQueryInput} from "../../../post/routers/input/post-query.input";
+import {mapToPostListPaginatedOutput} from "../../../post/routers/mapers/map-to-post-list-paginated-output.util";
 
-export async function getBlogPostListHandler(
+export async function getBlogListHandler(
     req: Request<{ id: string }, {}, {}, PostQueryInput>,
-    res: Response,
+    res: Response
 ) {
     try {
         const blogId = req.params.id;
         const queryInput = req.query;
 
-    } catch (e:unknown) {
+        const {items, totalCount} = await postService.findPostsByBlog(
+            queryInput,
+            blogId,
+        );
+
+        const postListOutput = mapToPostListPaginatedOutput(items, {
+            pageNumber: queryInput.pageNumber,
+            pageSize:queryInput.pageSize,
+            totalCount,
+        });
+
+        res.send(postListOutput);
+    } catch (e: unknown) {
         errorsHandler(e, res);
     }
 }

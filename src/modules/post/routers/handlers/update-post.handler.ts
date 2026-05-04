@@ -1,8 +1,8 @@
 import {Request, Response} from 'express';
 import {HttpStatus} from "../../../../core/types/http-statuses";
 import {PostAttributes} from "../../application/dtos/post.attributes";
-import {postRepository} from "../../repositories/post.repository";
-import {blogRepository} from "../../../blog/repositories/blog.repository";
+import {postsRepository} from "../../repositories/posts.repository";
+import {blogsRepository} from "../../../blog/repositories/blogs.repository";
 
 
 export async function updatePostHandler(
@@ -11,7 +11,7 @@ export async function updatePostHandler(
 ) {
     try {
         const id = req.params.id;
-        const post = await postRepository.findById(id);
+        const post = await postsRepository.findById(id);
 
         if (!post) {
             // res
@@ -20,7 +20,7 @@ export async function updatePostHandler(
             return;
         }
 
-        const blog = await blogRepository.findById(req.body.blogId)
+        const blog = await blogsRepository.findById(req.body.blogId)
 
         if (!blog) {
             // res
@@ -29,7 +29,7 @@ export async function updatePostHandler(
             return;
         }
 
-        await postRepository.update(id, req.body, blog.name);
+        await postsRepository.update(id, req.body, blog.name);
         res.sendStatus(HttpStatus.NoContent_204);
     } catch (e: unknown) {
         res.sendStatus(HttpStatus.InternalServerError_500)

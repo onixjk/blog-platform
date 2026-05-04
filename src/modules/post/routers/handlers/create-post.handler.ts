@@ -2,8 +2,8 @@ import {Request, Response} from "express";
 import {HttpStatus} from "../../../../core/types/http-statuses";
 import {PostAttributes} from "../../application/dtos/post.attributes";
 import {Post} from "../../domain/post";
-import {postRepository} from "../../repositories/post.repository";
-import {blogRepository} from "../../../blog/repositories/blog.repository";
+import {postsRepository} from "../../repositories/posts.repository";
+import {blogsRepository} from "../../../blog/repositories/blogs.repository";
 import {mapToPostViewModel} from "../mapers/map-to-post-view-model.util";
 
 export async function createPostHandler(
@@ -11,7 +11,7 @@ export async function createPostHandler(
     res: Response
 ) {
     try {
-        const blog = await blogRepository.findById(req.body.blogId)
+        const blog = await blogsRepository.findById(req.body.blogId)
 
         if (!blog) {
             // res
@@ -29,7 +29,7 @@ export async function createPostHandler(
             createdAt: new Date().toISOString(),
         };
 
-        const createdPost = await postRepository.create(newPost);
+        const createdPost = await postsRepository.create(newPost);
         const postViewModel = mapToPostViewModel(createdPost);
 
         res.status(HttpStatus.Created_201).send(postViewModel);

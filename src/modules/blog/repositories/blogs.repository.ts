@@ -5,7 +5,7 @@ import {ObjectId, WithId} from "mongodb";
 import {BlogQueryInput} from "../routers/input/blog-query.input";
 import {RepositoryNotFoundError} from "../../../core/errors/repository-not-found.error";
 
-export const blogRepository = {
+export const blogsRepository = {
     async findMany(
         queryDto: BlogQueryInput
     ): Promise<{ items: WithId<Blog>[], totalCount: number }> {
@@ -22,23 +22,23 @@ export const blogRepository = {
         const filter: any = {};
 
         if (searchBlogNameTerm) {
-            filter.name = { $regex: searchBlogNameTerm, $options: 'i' };
+            filter.name = {$regex: searchBlogNameTerm, $options: 'i'};
         }
 
         if (searchBlogWebsiteUrlTerm) {
-            filter.websiteUrl = { $regex: searchBlogWebsiteUrlTerm, $options: 'i' };
+            filter.websiteUrl = {$regex: searchBlogWebsiteUrlTerm, $options: 'i'};
         }
 
         const items = await blogCollection
             .find(filter)
-            .sort({ [sortBy]: sortDirection })
+            .sort({[sortBy]: sortDirection})
             .skip(skip)
             .limit(pageSize)
             .toArray();
 
         const totalCount = await blogCollection.countDocuments(filter);
 
-        return { items, totalCount };
+        return {items, totalCount};
     },
 
     async findById(id: string): Promise<WithId<Blog> | null> {
