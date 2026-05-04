@@ -11,7 +11,7 @@ export const createErrorMessages = (
         errors: errors.map((error) => ({
             status: error.status,
             detail: error.detail, //error message
-            source: { pointer: error.source ?? '' }, //error field
+            source: {pointer: error.source ?? ''}, //error field
             code: error.code ?? null, //domain error code
         })),
     };
@@ -34,7 +34,7 @@ export const inputValidationResultMiddleware = (
 ) => {
     const errors = validationResult(req)
         .formatWith(formatValidationError)
-        .array({ onlyFirstError: true });
+        .array({onlyFirstError: true});
 
     if (errors.length > 0) {
         res.status(HttpStatus.BadRequest_400).json(createErrorMessages(errors));

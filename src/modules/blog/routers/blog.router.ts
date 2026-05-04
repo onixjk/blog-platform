@@ -42,8 +42,8 @@ blogRouter
 
     .post('',
         superAdminGuardMiddleware,
-        blogCreateInputValidation,
-        inputValidationResultMiddleware,
+        // blogCreateInputValidation,
+        // inputValidationResultMiddleware,
         createBlogHandler,
     )
 
