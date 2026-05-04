@@ -1,4 +1,7 @@
 import {body} from "express-validator";
+import {resourceTypeValidation} from "../../../core/middlewares/validation/resource-type.validation-middleware";
+import {ResourceType} from "../../../core/types/resource-type";
+import {dataIdMatchValidation} from "../../../core/middlewares/validation/params-id.validation-middleware";
 
 const titleValidation = body('title')
     .isString().withMessage('title should be string')
@@ -27,7 +30,17 @@ const blogIdValidation = body('blogId')
     .isMongoId()
     .withMessage('Incorrect format of ObjectId')
 
-export const postInputDtoValidation = [
+export const postCreateInputValidation = [
+    resourceTypeValidation(ResourceType.Posts),
+    titleValidation,
+    shortDescriptionValidation,
+    contentValidation,
+    blogIdValidation,
+];
+
+export const postUpdateInputValidation = [
+    resourceTypeValidation(ResourceType.Posts),
+    dataIdMatchValidation,
     titleValidation,
     shortDescriptionValidation,
     contentValidation,

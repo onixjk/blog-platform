@@ -1,4 +1,7 @@
 import {body} from "express-validator";
+import {ResourceType} from "../../../core/types/resource-type";
+import {resourceTypeValidation} from "../../../core/middlewares/validation/resource-type.validation-middleware";
+import {dataIdMatchValidation} from "../../../core/middlewares/validation/params-id.validation-middleware";
 
 const nameValidation = body('name')
     .exists().withMessage('name is required')
@@ -20,7 +23,16 @@ const websiteUrlValidation = body('websiteUrl')
     .matches(/^https:\/\/([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*\/?$/)
     .withMessage('Invalid URL format, must match the pattern');
 
-export const blogInputDtoValidation = [
+export const blogCreateInputValidation = [
+    resourceTypeValidation(ResourceType.Blogs),
+    nameValidation,
+    descriptionValidation,
+    websiteUrlValidation,
+];
+
+export const blogUpdateInputValidation = [
+    resourceTypeValidation(ResourceType.Blogs),
+    dataIdMatchValidation,
     nameValidation,
     descriptionValidation,
     websiteUrlValidation,

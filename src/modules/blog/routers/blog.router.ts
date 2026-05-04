@@ -6,13 +6,24 @@ import {updateBlogHandler} from "./handlers/update-blog.handler";
 import {deleteBlogHandler} from "./handlers/delete-blog.handler";
 import {idValidation} from "../../../core/middlewares/validation/params-id.validation-middleware";
 import {inputValidationResultMiddleware} from "../../../core/middlewares/validation/input-validtion-result.middleware";
-import {blogInputDtoValidation} from "./blog.input-dto.validation-middlewares";
+import {
+    blogCreateInputValidation,
+    blogUpdateInputValidation
+} from "./blog.input-dto.validation-middlewares";
 import {superAdminGuardMiddleware} from "../../../auth/middlewares/super-admin.guard-middleware";
+import {
+    paginationAndSortingValidation
+} from "../../../core/middlewares/validation/query-pagination-sorting.validation-middleware";
+import {BlogSortField} from "./input/blog-sort-field";
+import {getBlogPostListHandler} from "./handlers/get-blog-post-list.handler";
+import {postCreateInputValidation} from "../../post/routers/post.input-dto.validation-middlewares";
 
 export const blogRouter = Router({});
 
 blogRouter
     .get('',
+        paginationAndSortingValidation(BlogSortField),
+        inputValidationResultMiddleware,
         getBlogListHandler,
     )
 
@@ -22,9 +33,23 @@ blogRouter
         getBlogHandler,
     )
 
+    .get('/:blogId/posts',
+        idValidation,
+        paginationAndSortingValidation(BlogSortField),
+        inputValidationResultMiddleware,
+        getBlogPostListHandler,
+    )
+
     .post('',
         superAdminGuardMiddleware,
-        blogInputDtoValidation,
+        blogCreateInputValidation,
+        inputValidationResultMiddleware,
+        createBlogHandler,
+    )
+
+    .post('/:blogId/posts',
+        superAdminGuardMiddleware,
+        postCreateInputValidation,
         inputValidationResultMiddleware,
         createBlogHandler,
     )
@@ -32,7 +57,7 @@ blogRouter
     .put('/:id',
         superAdminGuardMiddleware,
         idValidation,
-        blogInputDtoValidation,
+        blogUpdateInputValidation,
         inputValidationResultMiddleware,
         updateBlogHandler,
     )

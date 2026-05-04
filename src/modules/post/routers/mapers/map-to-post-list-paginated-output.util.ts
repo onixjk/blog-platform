@@ -1,8 +1,8 @@
 import {WithId} from 'mongodb';
-import {ResourceType} from '../../../../core/types/resource-type';
+import {Post} from "../../domain/post";
 import {PostListPaginatedOutput} from "../output/post-list-paginated.output";
 import {PostDataOutput} from "../output/post-data.output";
-import {Post} from "../../domain/post";
+import {ResourceType} from "../../../../core/types/resource-type";
 
 export function mapToPostListPaginatedOutput(
     posts: WithId<Post>[],
