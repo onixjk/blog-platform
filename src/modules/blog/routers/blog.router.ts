@@ -36,7 +36,7 @@ blogRouter
 
     .get('/:blogId/posts',
         idValidation,
-        // paginationAndSortingValidation(BlogSortField),
+        paginationAndSortingValidation(BlogSortField), //todo
         inputValidationResultMiddleware,
         getBlogPostListHandler,
     )
@@ -50,7 +50,7 @@ blogRouter
 
     .post('/:blogId/posts',
         superAdminGuardMiddleware,
-        // postCreateInputValidation,
+        postCreateInputValidation, //todo
         inputValidationResultMiddleware,
         createPostHandler,
     )
@@ -58,7 +58,7 @@ blogRouter
     .put('/:id',
         superAdminGuardMiddleware,
         idValidation,
-        // blogUpdateInputValidation,
+        blogUpdateInputValidation,  //todo
         inputValidationResultMiddleware,
         updateBlogHandler,
     )
