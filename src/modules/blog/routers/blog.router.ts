@@ -43,7 +43,7 @@ blogRouter
 
     .post('',
         superAdminGuardMiddleware,
-        // blogCreateInputValidation,
+        blogCreateInputValidation, //todo
         inputValidationResultMiddleware,
         createBlogHandler,
     )
