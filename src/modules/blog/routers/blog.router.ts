@@ -68,7 +68,7 @@ blogRouter
 
     .delete('/:id',
         superAdminGuardMiddleware,
-        paramIdValidation('id'),
+        // paramIdValidation('id'),
         inputValidationResultMiddleware,
         deleteBlogHandler,
     );
