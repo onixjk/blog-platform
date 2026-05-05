@@ -1,12 +1,12 @@
 import { body, param } from 'express-validator';
 
-export const idValidation = param('id')
+export const paramIdValidation = (paramName: string) => param(paramName)
     .exists()
     .withMessage('ID is required')
     .isString()
     .withMessage('ID must be a string')
     .isMongoId()
-    .withMessage('Неверный формат ObjectId');
+    .withMessage('Invalid format ObjectId');
 
 export const dataIdMatchValidation = body('data.id')
     .exists()

@@ -4,19 +4,21 @@ import {resourceTypeValidation} from "../../../core/middlewares/validation/resou
 import {dataIdMatchValidation} from "../../../core/middlewares/validation/params-id.validation-middleware";
 
 const nameValidation = body('name')
-    .exists().withMessage('name is required')
-    .isString().withMessage('name should be string')
+    .exists().withMessage('Name is required')
+    .isString().withMessage('Name should be string')
     .trim()
     .isLength({ min: 1, max: 15 })
     .withMessage('Length of name is not correct');
 
 const descriptionValidation = body('description')
+    .exists().withMessage('Description is required')
     .isString().withMessage('Description should be string')
     .trim()
     .isLength({min:1, max: 500 })
     .withMessage('Length of description is not correct');
 
 const websiteUrlValidation = body('websiteUrl')
+    .exists().withMessage('WebsiteUrl is required')
     .trim()
     .isLength({min:1, max: 100 }).withMessage('Length of URL is not correct')
     .isURL().withMessage('URL is required')
