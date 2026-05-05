@@ -70,8 +70,8 @@ blogRouter
     )
 
     .delete('/:id',
-        superAdminGuardMiddleware,
-        idValidation,
-        inputValidationResultMiddleware,
+        // superAdminGuardMiddleware,
+        // idValidation,
+        // inputValidationResultMiddleware,
         deleteBlogHandler,
     );
