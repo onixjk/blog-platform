@@ -30,7 +30,7 @@ postRouter
 
     .post('',
         superAdminGuardMiddleware,
-        postCreateInputValidation, //todo
+        postCreateInputValidation,
         inputValidationResultMiddleware,
         createPostHandler,
     )
@@ -38,7 +38,7 @@ postRouter
     .put('/:id',
         superAdminGuardMiddleware,
         idValidation,
-        postUpdateInputValidation, //todo
+        postUpdateInputValidation,
         inputValidationResultMiddleware,
         updatePostHandler,
     )

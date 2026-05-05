@@ -42,21 +42,21 @@ blogRouter
 
     .get('/:blogId/posts',
         blogIdValidation,
-        paginationAndSortingValidation(PostSortField), //todo
+        paginationAndSortingValidation(PostSortField),
         inputValidationResultMiddleware,
         getBlogPostListHandler,
     )
 
     .post('',
         superAdminGuardMiddleware,
-        blogCreateInputValidation, //todo
+        blogCreateInputValidation,
         inputValidationResultMiddleware,
         createBlogHandler,
     )
 
     .post('/:blogId/posts',
         superAdminGuardMiddleware,
-        postCreateInputValidation, //todo
+        postCreateInputValidation,
         inputValidationResultMiddleware,
         createPostHandler,
     )
@@ -64,7 +64,7 @@ blogRouter
     .put('/:id',
         superAdminGuardMiddleware,
         idValidation,
-        blogUpdateInputValidation,  //todo
+        blogUpdateInputValidation,
         inputValidationResultMiddleware,
         updateBlogHandler,
     )
