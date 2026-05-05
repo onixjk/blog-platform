@@ -10,6 +10,10 @@ export async function deleteBlogHandler(
     try {
         const id = req.params.id;
 
+        if (!id) {
+            console.log('net id')
+        }
+
         await blogsService.delete(id);
 
         res.sendStatus(HttpStatus.NoContent_204);
