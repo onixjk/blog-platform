@@ -4,7 +4,11 @@ import {getBlogListHandler} from "./handlers/get-blog-list.handler";
 import {createBlogHandler} from "./handlers/create-blog.handler";
 import {updateBlogHandler} from "./handlers/update-blog.handler";
 import {deleteBlogHandler} from "./handlers/delete-blog.handler";
-import {paramIdValidation} from "../../../core/middlewares/validation/params-id.validation-middleware";
+import {
+    blogIdValidation,
+    idValidation,
+    paramIdValidation
+} from "../../../core/middlewares/validation/params-id.validation-middleware";
 import {inputValidationResultMiddleware} from "../../../core/middlewares/validation/input-validtion-result.middleware";
 import {
     blogCreateInputValidation,
@@ -32,13 +36,13 @@ blogRouter
     )
 
     .get('/:id',
-        paramIdValidation('id'),
+        idValidation,
         inputValidationResultMiddleware,
         getBlogHandler,
     )
 
     .get('/:blogId/posts',
-        paramIdValidation('blogId'),
+        blogIdValidation,
         paginationAndSortingValidation(PostSortField), //todo
         inputValidationResultMiddleware,
         getBlogPostListHandler,
@@ -60,7 +64,7 @@ blogRouter
 
     .put('/:id',
         superAdminGuardMiddleware,
-        paramIdValidation('id'),
+        idValidation,
         blogUpdateInputValidation,  //todo
         inputValidationResultMiddleware,
         updateBlogHandler,
@@ -68,7 +72,7 @@ blogRouter
 
     .delete('/:id',
         superAdminGuardMiddleware,
-        // paramIdValidation('id'),
-        // inputValidationResultMiddleware,
+        idValidation,
+        inputValidationResultMiddleware,
         deleteBlogHandler,
     );

@@ -5,7 +5,7 @@ import {getPostHandler} from "./handlers/get-post.handler";
 import {createPostHandler} from "./handlers/create-post.handler";
 import {updatePostHandler} from "./handlers/update-post.handler";
 import {deletePostHandler} from "./handlers/delete-post.handler";
-import {paramIdValidation} from "../../../core/middlewares/validation/params-id.validation-middleware";
+import {idValidation, paramIdValidation} from "../../../core/middlewares/validation/params-id.validation-middleware";
 import {inputValidationResultMiddleware} from "../../../core/middlewares/validation/input-validtion-result.middleware";
 import {
     paginationAndSortingValidation
@@ -23,7 +23,7 @@ postRouter
     )
 
     .get('/:id',
-        paramIdValidation('id'),
+        idValidation,
         inputValidationResultMiddleware,
         getPostHandler
     )
@@ -37,7 +37,7 @@ postRouter
 
     .put('/:id',
         superAdminGuardMiddleware,
-        paramIdValidation('id'),
+        idValidation,
         postUpdateInputValidation, //todo
         inputValidationResultMiddleware,
         updatePostHandler,
@@ -45,7 +45,7 @@ postRouter
 
     .delete('/:id',
         superAdminGuardMiddleware,
-        paramIdValidation('id'),
+        idValidation,
         inputValidationResultMiddleware,
         deletePostHandler,
     );
