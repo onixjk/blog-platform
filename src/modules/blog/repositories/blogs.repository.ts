@@ -21,12 +21,14 @@ export const blogsRepository = {
         const skip = (pageNumber - 1) * pageSize;
         const filter: any = {};
 
-        if (searchBlogNameTerm) {
-            filter.name = {$regex: searchBlogNameTerm, $options: 'i'};
-        }
+        if(searchBlogNameTerm || searchBlogWebsiteUrlTerm) {
+            if (searchBlogNameTerm) {
+                filter.name = {$regex: searchBlogNameTerm, $options: 'i'};
+            }
 
-        if (searchBlogWebsiteUrlTerm) {
-            filter.websiteUrl = {$regex: searchBlogWebsiteUrlTerm, $options: 'i'};
+            if (searchBlogWebsiteUrlTerm) {
+                filter.websiteUrl = {$regex: searchBlogWebsiteUrlTerm, $options: 'i'};
+            }
         }
 
         const items = await blogCollection

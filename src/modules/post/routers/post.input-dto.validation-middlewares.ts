@@ -3,7 +3,7 @@ import {resourceTypeValidation} from "../../../core/middlewares/validation/resou
 import {ResourceType} from "../../../core/types/resource-type";
 import {dataIdMatchValidation} from "../../../core/middlewares/validation/params-id.validation-middleware";
 
-const titleValidation = body('title')
+const titleValidation = body('data.attributes.title')
     .exists()
     .withMessage('Title is required')
     .isString().withMessage('title should be string')
@@ -11,7 +11,7 @@ const titleValidation = body('title')
     .isLength({min: 1, max: 30})
     .withMessage('Length of title is not correct');
 
-const shortDescriptionValidation = body('shortDescription')
+const shortDescriptionValidation = body('data.attributes.shortDescription')
     .exists()
     .withMessage('ShortDescription is required')
     .isString()
@@ -20,7 +20,7 @@ const shortDescriptionValidation = body('shortDescription')
     .isLength({min: 1, max: 100})
     .withMessage('Length of shortDescription is not correct');
 
-const contentValidation = body('content')
+const contentValidation = body('data.attributes.content')
     .exists()
     .withMessage('Content is required')
     .isString().withMessage('Content should be string')
@@ -28,7 +28,7 @@ const contentValidation = body('content')
     .isLength({min: 1, max: 1000})
     .withMessage('Length of content is not correct');
 
-const blogIdValidation = body('blogId')
+const blogIdValidation = body('data.attributes.blogId')
     .exists()
     .withMessage('ID is required') // Проверка на наличие
     .isString()
