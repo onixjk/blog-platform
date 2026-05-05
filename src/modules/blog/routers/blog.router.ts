@@ -7,7 +7,6 @@ import {deleteBlogHandler} from "./handlers/delete-blog.handler";
 import {
     blogIdValidation,
     idValidation,
-    paramIdValidation
 } from "../../../core/middlewares/validation/params-id.validation-middleware";
 import {inputValidationResultMiddleware} from "../../../core/middlewares/validation/input-validtion-result.middleware";
 import {
