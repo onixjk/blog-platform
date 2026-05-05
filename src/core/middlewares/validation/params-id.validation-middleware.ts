@@ -21,10 +21,6 @@ export const dataIdMatchValidation = body('data.id')
     .withMessage('ID in body is required')
     .custom((value, { req }) => {
 
-        console.log('--- DEBUG VALIDATION ---');
-        console.log('BODY:', JSON.stringify(req.body, null, 2));
-        console.log('--- DEBUG VALIDATION ---');
-
         if (value !== req?.params?.id) {
             throw new Error('ID in URL and body must match');
         }

@@ -46,7 +46,6 @@ export const postCreateInputValidation = [
 
 export const postUpdateInputValidation = [
     resourceTypeValidation(ResourceType.Posts),
-    dataIdMatchValidation,
     titleValidation,
     shortDescriptionValidation,
     contentValidation,

@@ -1,7 +1,6 @@
 import {body} from "express-validator";
 import {ResourceType} from "../../../core/types/resource-type";
 import {resourceTypeValidation} from "../../../core/middlewares/validation/resource-type.validation-middleware";
-import {dataIdMatchValidation} from "../../../core/middlewares/validation/params-id.validation-middleware";
 
 const nameValidation = body('data.attributes.name')
     .exists().withMessage('Name is required')
@@ -34,7 +33,6 @@ export const blogCreateInputValidation = [
 
 export const blogUpdateInputValidation = [
     resourceTypeValidation(ResourceType.Blogs),
-    dataIdMatchValidation,
     nameValidation,
     descriptionValidation,
     websiteUrlValidation,
