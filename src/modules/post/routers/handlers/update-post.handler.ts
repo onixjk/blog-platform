@@ -1,9 +1,8 @@
 import {Request, Response} from 'express';
 import {HttpStatus} from "../../../../core/types/http-statuses";
-import {createErrorsMessages} from "../../../../core/utils/error.utils";
-import {PostInputDto} from "../../dto/post.input-dto";
-import {postRepository} from "../../repositories/post.repository";
-import {blogRepository} from "../../../blog/repositories/blog.repository";
+import {postsService} from "../../application/posts.service";
+import {errorsHandler} from "../../../../core/errors/errors.handler";
+import {PostInputDto} from "../input/post.input-dto";
 
 
 export async function updatePostHandler(
@@ -12,27 +11,11 @@ export async function updatePostHandler(
 ) {
     try {
         const id = req.params.id;
-        const post = await postRepository.findById(id);
 
-        if (!post) {
-            res
-                .status(HttpStatus.NotFound_404)
-                .send(createErrorsMessages([{message: "Post not found", field: "id"}]));
-            return;
-        }
+        await postsService.update(id, req.body);
 
-        const blog = await blogRepository.findById(req.body.blogId)
-
-        if (!blog) {
-            res
-                .status(HttpStatus.NotFound_404)
-                .send(createErrorsMessages([{message: "Blog not found", field: "id"}]));
-            return;
-        }
-
-        await postRepository.update(id, req.body, blog.name);
-        res.sendStatus(HttpStatus.NoContent_204);
+        res.sendStatus(HttpStatus.NoContent_204)
     } catch (e: unknown) {
-        res.sendStatus(HttpStatus.InternalServerError_500)
+        errorsHandler(e, res);
     }
 }
